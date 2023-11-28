@@ -25,15 +25,14 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
       />
       <div className={styles.center}>
         <div className={styles.naming}>
-        <span>
-          {track.name}
-        </span>
-          <span className={styles.artistName}>
-          {track.artist}
-        </span>
+          <span>
+            {track.name}
+          </span>
+            <span className={styles.artistName}>
+            {track.artist}
+          </span>
         </div>
         <button onClick={(e) => e.stopPropagation()}>
-
           <Icon data={TrashBin}/>
         </button>
       </div>

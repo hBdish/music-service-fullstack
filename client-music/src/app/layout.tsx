@@ -4,6 +4,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 import './globals.css'
 import React, {ReactNode} from "react";
 import MainLayout from "@/components/main-layout";
+import Player from "@/components/player/player";
 
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function Layout({
       <MainLayout>
         {children}
       </MainLayout>
+      <Player/>
       </body>
     </html>
   )
