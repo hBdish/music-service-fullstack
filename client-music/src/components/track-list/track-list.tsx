@@ -7,41 +7,23 @@ interface TrackListProps {
   tracks: Track[]
 }
 
-const MyTable = withTableActions(Table);
-
-
 const columns = [
-  {id: 'id'},
-  {id: 'text'},
+  {id: 'tracks'},
 ];
-const getRowActions = () => {
-  return [
-    {
-      text: 'Print', handler: () => {
-
-      }
-    },
-    {
-      text: 'Remove', handler: () => {
-      },
-    },
-  ];
-}
 
 const TrackList: FC<TrackListProps> = (props) => {
 
   const data = useMemo(() => {
     return props.tracks.map((el) => {
-      return {id: el._id, text: <TrackItem track={el}/>}
+      return { tracks: <TrackItem track={el}/>}
     })
   }, [props.tracks])
 
   return (
     <div>
-      <MyTable
+      <Table
         data={data}
         columns={columns}
-        getRowActions={getRowActions}
       />
     </div>
   );
