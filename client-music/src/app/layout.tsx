@@ -5,6 +5,7 @@ import './globals.css'
 import React, {ReactNode} from "react";
 import MainLayout from "@/components/main-layout";
 import Player from "@/components/player/player";
+import {StoreProvider} from "@/store/store-provider";
 
 
 export const metadata: Metadata = {
@@ -17,13 +18,18 @@ export default function Layout({
 }: {
   children: ReactNode
 }) {
+
+  
+
   return (
     <html lang="en">
       <body className="g-root g-root_theme_dark">
-      <MainLayout>
-        {children}
-      </MainLayout>
-      <Player/>
+        <StoreProvider>
+          <MainLayout>
+            {children}
+          </MainLayout>
+          <Player/>
+        </StoreProvider>
       </body>
     </html>
   )

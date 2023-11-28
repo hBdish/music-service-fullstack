@@ -5,6 +5,7 @@ import {Gear} from "@gravity-ui/icons";
 import {useRouter} from "next/navigation";
 import {Comment, Track} from "@/types/tracks";
 import TrackList from "@/components/track-list/track-list";
+import {buildSelector} from "@/store/hooks/build-selector";
 
 const tracks: Track[] = [
   {
@@ -37,10 +38,11 @@ const tracks: Track[] = [
 ]
 
 
-
-
 export default function Tracks() {
   const router = useRouter()
+
+
+
   return (
     <div>
       Список треков
