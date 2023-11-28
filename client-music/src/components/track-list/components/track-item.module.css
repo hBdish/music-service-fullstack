@@ -1,0 +1,30 @@
+.card {
+
+    width: 160px;
+    height: 180px;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+}
+
+.center {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.artistName {
+    font-size: 12px;
+    color: #808080FF;
+}
+
+.naming {
+    display: grid;
+}
+
+.controll {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+}
