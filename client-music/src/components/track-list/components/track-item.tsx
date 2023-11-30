@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import {Track} from "@/types/tracks";
-import {Button, Card, Icon, useActionHandlers} from '@gravity-ui/uikit';
+import {Button, Card, Icon} from '@gravity-ui/uikit';
 import {Pause, Play, TrashBin} from "@gravity-ui/icons";
 import styles from "./track-item.module.css";
 import {useRouter} from "next/navigation";
 import {useActions} from "@/store/hooks/use-actions";
 import {usePlayerValue} from "@/store/slice/player/player-selector";
+import {$api} from "@/api/api";
 
 interface TrackItem {
   track: Track
@@ -14,7 +15,7 @@ interface TrackItem {
 
 const TrackItem: FC<TrackItem> = ({track, active = false}) => {
   const router = useRouter()
-  const { play: playTrack, pause: pauseTrack, setActiveTrack} = useActions()
+  const {play: playTrack, pause: pauseTrack, setActiveTrack} = useActions()
   const {active: activeTrack} = usePlayerValue()
   const play = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
@@ -23,6 +24,17 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
     }
 
     playTrack()
+  }
+
+  const deleteTrack = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+
+    try {
+      const response = await $api.delete('http://localhost:100/tracks/' + track._id)
+      window.location.reload()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -40,11 +52,11 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
           <span>
             {track.name}
           </span>
-            <span className={styles.artistName}>
+          <span className={styles.artistName}>
             {track.artist}
           </span>
         </div>
-        <Button onClick={(e) => e.stopPropagation()}>
+        <Button onClick={deleteTrack}>
           <Icon data={TrashBin}/>
         </Button>
       </div>
