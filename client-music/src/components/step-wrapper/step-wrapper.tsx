@@ -1,10 +1,6 @@
 'use client'
-import {FC, ReactNode, useEffect, useState} from 'react';
-import {
-  Button, Icon,
-  RadioButton,
-  RadioButtonOption
-} from "@gravity-ui/uikit";
+import {FC, ReactNode, useState} from 'react';
+import {Button, Icon, RadioButton, RadioButtonOption} from "@gravity-ui/uikit";
 import styles from './step-wrapper.module.css'
 import {ChevronLeft, ChevronRight} from "@gravity-ui/icons";
 
@@ -13,6 +9,8 @@ interface StepWrapper {
   stepOne?: ReactNode
   stepTwo?: ReactNode
   stepThree?: ReactNode
+  createTrack: () => void
+  canCreateTrack?: boolean
 }
 
 const options: RadioButtonOption[] = [
@@ -22,7 +20,8 @@ const options: RadioButtonOption[] = [
 ];
 
 
-const StepWrapper: FC<StepWrapper> = ({children, stepOne, stepThree, stepTwo}) => {
+const StepWrapper: FC<StepWrapper> = (props) => {
+  const {canCreateTrack = false, createTrack, children, stepOne, stepThree, stepTwo} = props
   const [step, setStep] = useState('0')
 
   const render = () => {
@@ -72,15 +71,20 @@ const StepWrapper: FC<StepWrapper> = ({children, stepOne, stepThree, stepTwo}) =
         </Button>
       </div>
 
+
+      <Button disabled={!canCreateTrack} onClick={createTrack}>
+        Create
+      </Button>
+
       <RadioButton
         className={styles.radioButton}
         options={options}
         onUpdate={(value) => setStep(value)}
         value={options[+step].value}
         size="xl">
-          <RadioButton.Option content={options[0].content} value={options[0].value} />
-          <RadioButton.Option content={options[1].content} value={options[1].value} />
-          <RadioButton.Option content={options[2].content} value={options[2].value} />
+        <RadioButton.Option content={options[0].content} value={options[0].value}/>
+        <RadioButton.Option content={options[1].content} value={options[1].value}/>
+        <RadioButton.Option content={options[2].content} value={options[2].value}/>
       </RadioButton>
     </div>
   );

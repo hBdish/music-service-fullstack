@@ -3,10 +3,12 @@ import {playerReducer} from "@/store/slice/player/player-slice";
 import {tracksReducer} from "@/store/slice/track/tracks-slice";
 import {$api} from "@/api/api";
 import {StateSchema, ThunkExtraArg} from "@/store/types/types";
+import {createTrackReducer} from "@/store/slice/create-track/create-track-slice";
 
-const rootReducers: ReducersMapObject<StateSchema>  = {
+const rootReducers: ReducersMapObject<StateSchema> = {
   player: playerReducer,
   tracks: tracksReducer,
+  createTrack: createTrackReducer,
 }
 
 const extraArg: ThunkExtraArg = {
@@ -30,7 +32,6 @@ export const store = configureStore({
 //   rejectValue: string
 //   extra: ThunkExtraArg
 // }>() // TODO Разобраться как работает
-
 
 
 export type RootState = ReturnType<typeof store.getState>

@@ -9,42 +9,44 @@ import {useEffect} from "react";
 import {useAppDispatch} from "@/store/hooks/hooks";
 import {fetchTracks} from "@/store/slice/track/tracks-service";
 import {$api} from "@/api/api";
+import {useTrackValue} from "@/store/slice/track/tracks-selectors";
 
 
-const tracks: Track[] = [
-  {
-    _id: '1',
-    name: 'Track 1',
-    artist: 'travis',
-    text: 'text 1',
-    listeners: 0,
-    picture: '123',
-    audio: 'http://localhost:100/audio/173c5946-151d-409f-966a-50a999583c75.mp3'
-  },
-  {
-    _id: '2',
-    name: 'Track 2',
-    artist: 'Kanye',
-    text: 'text 3',
-    listeners: 0,
-    picture: '123',
-    audio: '123'
-  },
-  {
-    _id: '3',
-    name: 'Track 3',
-    artist: 'Taylor',
-    text: 'text 3',
-    listeners: 0,
-    picture: '123',
-    audio: '123'
-  }
-]
+// const tracks: Track[] = [
+//   {
+//     _id: '1',
+//     name: 'Track 1',
+//     artist: 'travis',
+//     text: 'text 1',
+//     listeners: 0,
+//     picture: '123',
+//     audio: 'http://localhost:100/audio/173c5946-151d-409f-966a-50a999583c75.mp3'
+//   },
+//   {
+//     _id: '2',
+//     name: 'Track 2',
+//     artist: 'Kanye',
+//     text: 'text 3',
+//     listeners: 0,
+//     picture: '123',
+//     audio: '123'
+//   },
+//   {
+//     _id: '3',
+//     name: 'Track 3',
+//     artist: 'Taylor',
+//     text: 'text 3',
+//     listeners: 0,
+//     picture: '123',
+//     audio: '123'
+//   }
+// ]
 
 
 export default function Tracks() {
   const router = useRouter()
   const dispatch = useAppDispatch()
+  const {tracks, isLoading} = useTrackValue()
 
   useEffect(() => {
     dispatch(fetchTracks())

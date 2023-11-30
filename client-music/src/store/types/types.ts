@@ -1,10 +1,11 @@
 import {Player} from "@/types/player";
-import {Tracks} from "@/types/tracks";
+import {CreateTrack, Tracks} from "@/types/tracks";
 import {AxiosInstance} from "axios";
 
 export interface StateSchema {
   player: Player
   tracks: Tracks
+  createTrack: CreateTrack,
 }
 
 export interface ThunkExtraArg {

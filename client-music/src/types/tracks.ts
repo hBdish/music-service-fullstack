@@ -7,14 +7,19 @@ export interface Comment {
 export interface Track {
   _id: string
   name: string
-  artist: string
   text: string
+  artist: string
   listeners: number
   picture: string
   audio: string
   comments?: Comment[]
 }
 
+export interface CreateTrack {
+  name: string
+  text: string
+  artist: string
+}
 
 export interface Tracks {
   tracks: Track[]

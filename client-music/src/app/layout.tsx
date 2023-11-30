@@ -28,6 +28,7 @@ export default function Layout({
           <MainLayout>
             {children}
           </MainLayout>
+
           <Player/>
         </StoreProvider>
       </body>
