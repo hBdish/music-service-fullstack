@@ -9,6 +9,7 @@ import {useAppDispatch} from "@/store/hooks/hooks";
 import {fetchTracks, searchTracks} from "@/store/slice/track/tracks-service";
 import {useTrackValue} from "@/store/slice/track/tracks-selectors";
 import {useInput} from "@/lib/hooks/use-input";
+import {VStack} from "@/components/stack";
 
 export default function Tracks() {
   const router = useRouter()
@@ -33,7 +34,7 @@ export default function Tracks() {
   }, [search.value]);
 
   return (
-    <div>
+    <VStack>
       Список треков
       <Button onClick={() => router.push('/tracks/create')} view="outlined" size="l">
         <Icon data={Gear} size={18}/>
@@ -43,7 +44,7 @@ export default function Tracks() {
         search.onChange(e.target.value)
       }} value={search.value}/>
       <TrackList tracks={tracks}/>
-    </div>
+    </VStack>
   )
 }
 

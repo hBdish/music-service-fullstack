@@ -6,6 +6,7 @@ import React, {ReactNode} from "react";
 import MainLayout from "@/components/main-layout";
 import Player from "@/components/player/player";
 import {StoreProvider} from "@/store/store-provider";
+import {VStack} from "@/components/stack";
 
 
 export const metadata: Metadata = {
@@ -24,11 +25,13 @@ export default function Layout({
     <html lang="en">
     <body className="g-root g-root_theme_dark">
     <StoreProvider>
-      <MainLayout title={'Музыкальная площадка'}>
-        {children}
-      </MainLayout>
+      <VStack>
+        <MainLayout title={'Музыкальная площадка'}>
+          {children}
+        </MainLayout>
+        <Player/>
+      </VStack>
 
-      <Player/>
     </StoreProvider>
     </body>
     </html>
