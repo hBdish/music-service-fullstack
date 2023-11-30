@@ -14,3 +14,10 @@ export interface Track {
   audio: string
   comments?: Comment[]
 }
+
+
+export interface Tracks {
+  tracks: Track[]
+  error?: string
+  isLoading: boolean
+}

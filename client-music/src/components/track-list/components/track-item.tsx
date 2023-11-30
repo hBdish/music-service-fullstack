@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
 import {Track} from "@/types/tracks";
-import {Card, Icon} from '@gravity-ui/uikit';
+import {Card, Icon, useActionHandlers} from '@gravity-ui/uikit';
 import {Pause, Play, TrashBin} from "@gravity-ui/icons";
 import styles from "./track-item.module.css";
 import {useRouter} from "next/navigation";
+import {useActions} from "@/store/hooks/use-actions";
 
 interface TrackItem {
   track: Track
@@ -12,6 +13,14 @@ interface TrackItem {
 
 const TrackItem: FC<TrackItem> = ({track, active = false}) => {
   const router = useRouter()
+  const {play: playTrack, pause: pauseTrack, setActiveTrack} = useActions()
+
+
+  const play = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    setActiveTrack(track)
+    playTrack()
+  }
 
   return (
     <Card className={styles.card} type={"action"} onClick={() => {
@@ -37,7 +46,7 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
         </button>
       </div>
       <div className={styles.controll}>
-        <button onClick={(e) => e.stopPropagation()}>
+        <button onClick={play}>
           <Icon data={!active ? Play : Pause}/>
         </button>
         {!active && <div>02:20/03:01</div>}

@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from 'react';
 import {Track} from "@/types/tracks";
-import {Table, withTableActions} from "@gravity-ui/uikit";
+import {Table} from "@gravity-ui/uikit";
 import TrackItem from "@/components/track-list/components/track-item";
 
 interface TrackListProps {
@@ -20,12 +20,10 @@ const TrackList: FC<TrackListProps> = (props) => {
   }, [props.tracks])
 
   return (
-    <div>
       <Table
         data={data}
         columns={columns}
       />
-    </div>
   );
 }
 

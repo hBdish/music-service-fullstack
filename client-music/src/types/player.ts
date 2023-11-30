@@ -1,6 +1,6 @@
 import {Track} from "@/types/tracks";
 
-export interface PlayerState {
+export interface Player {
   active: null | Track
   volume: number
   duration: number

@@ -1,27 +1,69 @@
 'use client'
-import React, {useEffect} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import {Pause, Play} from "@gravity-ui/icons";
 import {Icon} from "@gravity-ui/uikit";
 import {Volume} from '@gravity-ui/icons';
 import styles from './player.module.css'
 import TrackProgress from "@/components/player/track-progress/track-progress";
-import {buildSelector} from "@/store/hooks/build-selector";
-import {useActiveValue, useVolumeValue} from "@/store/slice/player-selector";
+import {useTrackValue, useVolumeValue} from "@/store/slice/player/player-selector";
 import {useActions} from "@/store/hooks/use-actions";
 
+let audio: HTMLAudioElement
+
 const Player = () => {
-  const {pause} = useActiveValue()
+  const {active, pause, volume, currentTime, duration} = useTrackValue()
+
+  const {setDuration, setCurrentTime ,setVolume ,pause: setPause, play: setPlay} = useActions()
+
+  const setAudio = () => {
+    if (active) {
+
+      audio.src = active.audio
+      audio.volume = volume / 100
+
+      audio.onloadedmetadata = () => {
+        setDuration(Math.ceil(audio.duration))
+      }
+
+      audio.ontimeupdate = () => {
+        setCurrentTime(Math.ceil(audio.currentTime))
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!audio) {
+      audio = new Audio()
+    } else {
+      setAudio()
+      onPlay()
+    }
+  },[active])
 
 
-  const {pause: setPause, play: setPlay} = useActions()
 
   const onPlay = () => {
     if (pause) {
       setPlay()
+      audio?.play()
     } else {
       setPause()
+      audio?.pause()
     }
+  }
 
+  const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
+    setVolume(Number(e.target.value))
+    audio.volume = Number(e.target.value) / 100
+  }
+
+  const changeCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
+    setCurrentTime(Number(e.target.value))
+    audio.currentTime = Number(e.target.value)
+  }
+
+  if (!active) {
+    return null
   }
 
   return (
@@ -31,15 +73,15 @@ const Player = () => {
       </button>
       <div className={styles.naming}>
           <span>
-            {'track.name'}
+            {active?.name}
           </span>
         <span className={styles.artistName}>
-            {'track.artist'}
+            {active?.artist}
           </span>
       </div>
-      <TrackProgress left={0} right={100} onChange={() => {}}/>
+      <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
       <Icon data={Volume} className={styles.volume} />
-      <TrackProgress left={0} right={100} onChange={() => {}}/>
+      <TrackProgress left={volume} right={100} onChange={changeVolume}/>
     </div>
   );
 };

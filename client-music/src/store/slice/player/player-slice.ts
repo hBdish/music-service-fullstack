@@ -1,15 +1,14 @@
 'use client'
-import {PlayerState} from "@/types/player";
+import {Player} from "@/types/player";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Track} from "@/types/tracks";
-import {HYDRATE} from "next-redux-wrapper";
 
-const initialState: PlayerState = {
+const initialState: Player = {
   active: null,
   currentTime: 0,
   duration: 0,
   pause: true,
-  volume: 0
+  volume: 50,
 }
 
 export const playerSlice = createSlice({

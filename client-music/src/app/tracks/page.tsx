@@ -1,11 +1,15 @@
 "use client"
 
-import {Button, Icon, Table, withTableActions} from "@gravity-ui/uikit";
+import {Button, Icon} from "@gravity-ui/uikit";
 import {Gear} from "@gravity-ui/icons";
 import {useRouter} from "next/navigation";
-import {Comment, Track} from "@/types/tracks";
+import { Track} from "@/types/tracks";
 import TrackList from "@/components/track-list/track-list";
-import {buildSelector} from "@/store/hooks/build-selector";
+import {useEffect} from "react";
+import {useAppDispatch} from "@/store/hooks/hooks";
+import {fetchTracks} from "@/store/slice/track/tracks-service";
+import {$api} from "@/api/api";
+
 
 const tracks: Track[] = [
   {
@@ -15,7 +19,7 @@ const tracks: Track[] = [
     text: 'text 1',
     listeners: 0,
     picture: '123',
-    audio: '123'
+    audio: 'http://localhost:100/audio/173c5946-151d-409f-966a-50a999583c75.mp3'
   },
   {
     _id: '2',
@@ -40,8 +44,11 @@ const tracks: Track[] = [
 
 export default function Tracks() {
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
-
+  useEffect(() => {
+    dispatch(fetchTracks())
+  }, [dispatch])
 
   return (
     <div>
