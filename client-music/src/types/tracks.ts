@@ -23,6 +23,7 @@ export interface CreateTrack {
 
 export interface Tracks {
   tracks: Track[]
+  track?: Track
   error?: string
   isLoading: boolean
 }

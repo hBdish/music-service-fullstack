@@ -1,5 +1,3 @@
-'use client'
-
 import {TextArea, TextInput} from '@/lib/mui';
 import styles from './step-one.module.css'
 import {useInput} from "@/lib/hooks/use-input";

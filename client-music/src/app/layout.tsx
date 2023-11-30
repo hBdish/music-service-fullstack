@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type {Metadata} from 'next'
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import './globals.css'
@@ -14,24 +14,23 @@ export const metadata: Metadata = {
 }
 
 export default function Layout({
-  children,
-}: {
+                                 children,
+                               }: {
   children: ReactNode
 }) {
 
-  
 
   return (
     <html lang="en">
-      <body className="g-root g-root_theme_dark">
-        <StoreProvider>
-          <MainLayout>
-            {children}
-          </MainLayout>
+    <body className="g-root g-root_theme_dark">
+    <StoreProvider>
+      <MainLayout title={'Музыкальная площадка'}>
+        {children}
+      </MainLayout>
 
-          <Player/>
-        </StoreProvider>
-      </body>
+      <Player/>
+    </StoreProvider>
+    </body>
     </html>
   )
 }

@@ -1,53 +1,97 @@
 'use client'
 
-import React from 'react';
-import {Track} from "@/types/tracks";
+import React, {useEffect} from 'react';
 import {Button, TextInput} from "@gravity-ui/uikit";
 import {useRouter} from "next/navigation";
 import styles from './track-page.module.css'
-import {comment} from "postcss";
+import {useAppDispatch} from "@/store/hooks/hooks";
+import {fetchTrack} from "@/store/slice/track/tracks-service";
+import {useTrackValue} from "@/store/slice/track/tracks-selectors";
+import {useInput} from "@/lib/hooks/use-input";
+import {$api} from "@/api/api";
 
-const TrackPage = () => {
+
+const TrackPage = (props: any) => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
+  const username = useInput('')
+  const comment = useInput('')
 
-  const track: Track =  {
-      _id: '1',
-      name: 'Track 1',
-      artist: 'travis',
-      text: 'text 1',
-      listeners: 0,
-      picture: '123',
-      audio: '123'
+  const addComment = async () => {
+    try {
+      const response = await $api.post(
+        'http://localhost:100/tracks/comments', {
+          username: username.value,
+          text: comment.value,
+          trackId: track?._id
+        }
+      )
+
+      window.location.reload()
+    } catch (e) {
+      console.log(e)
     }
+
+  }
+
+  useEffect(() => {
+    dispatch(fetchTrack(props?.params?.id))
+  }, []);
+
+  const {track, isLoading} = useTrackValue()
+
+  if (isLoading) {
+    return <>Loading</>
+  }
 
   return (
     <div className={styles.main}>
-      <Button onClick={() => router.push('/tracks')} view="outlined" size="l">
+      <Button
+        onClick={() => router.push('/tracks')}
+        view="outlined"
+        size="l"
+      >
         К списку треков
       </Button>
       <div className={styles.header}>
-        <img src={track.picture} width={200} height={200}/>
+        <img
+          src={'http://localhost:100/' + track?.picture}
+          width={200}
+          height={200}
+        />
         <div>
-          <h1>{track.name}</h1>
-          <h3>Исполнитель - {track.artist}</h3>
-          <h3>Прослушиваний - {track.listeners}</h3>
+          <h1>{track?.name}</h1>
+          <h3>Исполнитель - {track?.artist}</h3>
+          <h3>Прослушиваний - {track?.listeners}</h3>
         </div>
       </div>
       <h2>Слова</h2>
-      <p>{track.text}</p>
+      <p>{track?.text}</p>
       <h3>Комментарии</h3>
       <div>
-        <TextInput label={"Ваше имя"}  />
-        <TextInput label={"Ваш комментарий"}  />
-        <Button view={'outlined-action'}>
+        <TextInput
+          value={username.value}
+          onChange={(e) => {
+            username.onChange(e.target.value)
+          }}
+          label={"Ваше имя"}
+        />
+        <TextInput
+          value={comment.value}
+          onChange={(e) => {
+            comment.onChange(e.target.value)
+          }}
+          label={"Ваш комментарий"}
+        />
+        <Button onClick={addComment} view={'outlined-action'}>
           Отправить
         </Button>
       </div>
-      {track.comments?.map((comment) => {
-        return  (
+      {track?.comments?.map((comment) => {
+        return (
           <div key={comment._id}>
             {comment.username}
-            {comment.username}
+            {comment.text}
           </div>
         )
       })}

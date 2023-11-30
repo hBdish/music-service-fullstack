@@ -7,11 +7,13 @@ import StepThree from "@/components/step-wrapper/component/step-three/step-three
 import {useAppDispatch} from "@/store/hooks/hooks";
 import {createTrack} from "@/store/slice/create-track/create-track-service";
 import {Button} from "@gravity-ui/uikit";
+import {useRouter} from "next/navigation";
 
 const Create = () => {
   const [picture, setPicture] = useState(null)
   const [audio, setAudio] = useState(null)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   return (
     <StepWrapper
@@ -26,6 +28,7 @@ const Create = () => {
 
       <Button onClick={() => {
         dispatch(createTrack({picture, audio}))
+        router.push('/tracks')
       }}>
         create
       </Button>

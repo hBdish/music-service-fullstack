@@ -1,4 +1,3 @@
-'use client'
 import React from 'react';
 import FileUpload from "@/components/file-upload/file-upload";
 import {Button} from "@gravity-ui/uikit";

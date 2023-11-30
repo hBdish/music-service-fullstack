@@ -1,10 +1,10 @@
-import {Player} from "@/types/player";
-import {Track, Tracks} from "@/types/tracks";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchTracks} from "@/store/slice/track/tracks-service";
+import {Tracks} from "@/types/tracks";
+import {createSlice} from "@reduxjs/toolkit";
+import {fetchTrack, fetchTracks, searchTracks} from "@/store/slice/track/tracks-service";
 
 const initialState: Tracks = {
   tracks: [],
+  track: undefined,
   error: undefined,
   isLoading: false
 }
@@ -12,12 +12,7 @@ const initialState: Tracks = {
 export const tracksSlice = createSlice({
   name: 'tracksSlice',
   initialState,
-  reducers: {
-    play(state){
-      console.log(state.tracks)
-      console.log('state.tracks')
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTracks.pending, (state) => {
@@ -32,8 +27,32 @@ export const tracksSlice = createSlice({
         state.isLoading = false
         state.error = action.payload
       })
-    },
+      .addCase(searchTracks.pending, (state) => {
+        state.error = undefined
+        state.isLoading = true
+      })
+      .addCase(searchTracks.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.tracks = action.payload
+      })
+      .addCase(searchTracks.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
+      })
+      .addCase(fetchTrack.pending, (state) => {
+        state.error = undefined
+        state.isLoading = true
+      })
+      .addCase(fetchTrack.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.track = action.payload
+      })
+      .addCase(fetchTrack.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
+      })
+  },
 })
 
-export const { actions: tracksActions } = tracksSlice;
-export const { reducer: tracksReducer } = tracksSlice;
+export const {actions: tracksActions} = tracksSlice;
+export const {reducer: tracksReducer} = tracksSlice;
