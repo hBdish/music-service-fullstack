@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gravity-ui/navigation": "^1.7.0",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.2",
     "next": "14.0.3",

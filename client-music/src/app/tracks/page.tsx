@@ -1,8 +1,6 @@
 "use client"
 
-import {Button, Icon, Loader, TextInput} from "@gravity-ui/uikit";
-import {Gear} from "@gravity-ui/icons";
-import {useRouter} from "next/navigation";
+import {Loader, TextInput} from "@gravity-ui/uikit";
 import TrackList from "@/components/track-list/track-list";
 import {useEffect, useState} from "react";
 import {useAppDispatch} from "@/store/hooks/hooks";
@@ -13,7 +11,6 @@ import {HStack, VStack} from "@/components/stack";
 
 
 export default function Tracks() {
-  const router = useRouter()
   const dispatch = useAppDispatch()
   const {tracks, isLoading} = useTrackValue()
   const search = useInput('')
@@ -56,14 +53,7 @@ export default function Tracks() {
           }}
           value={search.value}
         />
-        <Button
-          onClick={() => router.push('/tracks/create')}
-          view="outlined"
-          size="l"
-        >
-          <Icon data={Gear} size={18}/>
-          Загрузить
-        </Button>
+
       </HStack>
 
       <TrackList tracks={tracks}/>
