@@ -4,11 +4,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
+import { PlayListModule } from './play-list/play-list.module';
 
 @Module({
   imports: [
     TrackModule,
     FileModule,
+    PlayListModule,
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
     }),
