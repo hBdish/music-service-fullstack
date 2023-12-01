@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import {useActions} from "@/store/hooks/use-actions";
 import {usePlayerValue} from "@/store/slice/player/player-selector";
 import {$api} from "@/api/api";
+import {HStack, VStack} from "@/components/stack";
 
 interface TrackItem {
   track: Track
@@ -41,31 +42,46 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
     <Card className={styles.card} type={"action"} onClick={() => {
       router.push(`/tracks/${track._id}`)
     }}>
-      <img
-        alt={'img'}
-        src={`http://localhost:100/${track.picture}`}
-        width={120}
-        height={70}
-      />
-      <div className={styles.center}>
-        <div className={styles.naming}>
-          <span>
+      <HStack gap={'16'} max align={'start'}>
+
+        <VStack gap={'16'} max justify={'between'}>
+          <img
+            className={styles.img}
+            alt={'img'}
+            src={`http://localhost:100/${track.picture}`}
+            width={120}
+            height={120}
+          />
+
+          <HStack gap={'8'}>
+            <Button onClick={play}>
+              <Icon data={!active ? Play : Pause}/>
+            </Button>
+            {!active && <div>02:20/03:01</div>}
+          </HStack>
+
+
+        </VStack>
+
+        <VStack max justify={'between'}>
+          <VStack>
+             <span>
             {track.name}
           </span>
-          <span className={styles.artistName}>
+            <span className={styles.artistName}>
             {track.artist}
           </span>
-        </div>
-        <Button onClick={deleteTrack}>
-          <Icon data={TrashBin}/>
-        </Button>
-      </div>
-      <div className={styles.controll}>
-        <Button onClick={play}>
-          <Icon data={!active ? Play : Pause}/>
-        </Button>
-        {!active && <div>02:20/03:01</div>}
-      </div>
+          </VStack>
+
+
+          <Button onClick={deleteTrack}>
+            <Icon data={TrashBin}/>
+          </Button>
+        </VStack>
+
+
+      </HStack>
+
     </Card>
   );
 };

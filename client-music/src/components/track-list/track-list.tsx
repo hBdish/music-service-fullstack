@@ -12,7 +12,7 @@ interface TrackListProps {
 const TrackList: FC<TrackListProps> = (props) => {
 
   return (
-    <VStack gap={'24'} className={style.table}>
+    <VStack max gap={'24'} align={"center"} className={style.table}>
       {props.tracks.map((el) =>
         <TrackItem key={el._id} track={el}/>
       )}

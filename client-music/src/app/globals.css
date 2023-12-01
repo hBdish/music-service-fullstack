@@ -3,8 +3,9 @@
 
 :root {
     --navbar-height: 32px;
-    --header-height: 120px;
-    --content-height: calc(100vh - var(--navbar-height) - var(--header-height));
+    --header-height: 60px;
+    --player-height: 60px;
+    --content-height: calc(100vh - var(--navbar-height) - var(--header-height) - var(--player-height));
 }
 
 .app {
