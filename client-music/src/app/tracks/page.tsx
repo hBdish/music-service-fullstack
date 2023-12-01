@@ -48,6 +48,8 @@ export default function Tracks() {
 
       <HStack style={{paddingTop: '8px'}} gap={'16'} max align={"center"} justify={"center"}>
         <TextInput
+          label={"Поиск"}
+          style={{maxWidth: '50%'}}
           onChange={(e) => {
             search.onChange(e.target.value)
           }}
