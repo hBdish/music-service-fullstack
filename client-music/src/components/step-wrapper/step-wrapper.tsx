@@ -1,8 +1,9 @@
 'use client'
 import {FC, ReactNode, useState} from 'react';
-import {Button, Icon, RadioButton, RadioButtonOption} from "@gravity-ui/uikit";
+import {Button, Card, Icon, RadioButton, RadioButtonOption} from "@gravity-ui/uikit";
 import styles from './step-wrapper.module.css'
 import {ChevronLeft, ChevronRight} from "@gravity-ui/icons";
+import {HStack, VStack} from "@/components/stack";
 
 interface StepWrapper {
   children: ReactNode
@@ -58,23 +59,23 @@ const StepWrapper: FC<StepWrapper> = (props) => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.body}>
+      <HStack max align={"center"} justify={"between"}>
         <Button disabled={step === '0'} onClick={back} view={"action"}>
           <Icon data={ChevronLeft}/>
         </Button>
-        <div>
-          {children}
-          {render()}
-        </div>
+        <Card className={styles.card}>
+          <VStack gap={'24'}>
+            {children}
+            {render()}
+            <Button disabled={!canCreateTrack} onClick={createTrack}>
+              Создать трек
+            </Button>
+          </VStack>
+        </Card>
         <Button disabled={step === '2'} onClick={next} view={"action"}>
           <Icon data={ChevronRight}/>
         </Button>
-      </div>
-
-
-      <Button disabled={!canCreateTrack} onClick={createTrack}>
-        Create
-      </Button>
+      </HStack>
 
       <RadioButton
         className={styles.radioButton}

@@ -1,6 +1,7 @@
 import React from 'react';
 import FileUpload from "@/components/file-upload/file-upload";
 import {Button} from "@gravity-ui/uikit";
+import {VStack} from "@/components/stack";
 
 interface StepThree {
   setFile: Function
@@ -8,13 +9,13 @@ interface StepThree {
 
 const StepThree = (props: StepThree) => {
   return (
-    <div>
+    <VStack>
       <FileUpload setFile={props.setFile} accept={'audio/*'}>
         <Button view={'outlined-action'}>
           Загрузите аудио
         </Button>
       </FileUpload>
-    </div>
+    </VStack>
   );
 };
 

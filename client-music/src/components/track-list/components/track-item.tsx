@@ -1,23 +1,29 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Track} from "@/types/tracks";
-import {Button, Card, Icon} from '@gravity-ui/uikit';
-import {Pause, Play, TrashBin} from "@gravity-ui/icons";
+import {Button, Icon} from '@gravity-ui/uikit';
+import {CircleInfo, Pause, Play, TrashBin} from "@gravity-ui/icons";
 import styles from "./track-item.module.css";
 import {useRouter} from "next/navigation";
 import {useActions} from "@/store/hooks/use-actions";
 import {usePlayerValue} from "@/store/slice/player/player-selector";
 import {$api} from "@/api/api";
 import {HStack, VStack} from "@/components/stack";
+import {classNames, Mods} from "@/lib/class-names/class-names";
 
 interface TrackItem {
   track: Track
   active?: boolean
+  activeId?: string
 }
 
-const TrackItem: FC<TrackItem> = ({track, active = false}) => {
+const TrackItem: FC<TrackItem> = ({track, active = false, activeId = ''}) => {
   const router = useRouter()
   const {play: playTrack, pause: pauseTrack, setActiveTrack} = useActions()
   const {active: activeTrack} = usePlayerValue()
+  const [isFocus, setIsFocus] = useState(false)
+  const isActiveTrack = activeTrack?._id !== activeId
+
+
   const play = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     if (track !== activeTrack) {
@@ -38,51 +44,60 @@ const TrackItem: FC<TrackItem> = ({track, active = false}) => {
     }
   }
 
-  return (
-    <Card className={styles.card} type={"action"} onClick={() => {
-      router.push(`/tracks/${track._id}`)
-    }}>
-      <HStack gap={'16'} max align={'start'}>
+  const mods: Mods = {
+    [styles.isFocused]: isFocus,
+    [styles.isActive]: !isActiveTrack
+  }
 
-        <VStack gap={'16'} max justify={'between'}>
+  return (
+    <div
+      className={classNames(styles.card, mods, [])}
+      onMouseEnter={() => setIsFocus(true)}
+      onMouseLeave={() => setIsFocus(false)}
+    >
+      <HStack
+      >
+        <div className={styles.imgBtn}>
           <img
-            className={styles.img}
+            className={classNames(styles.img, mods, [])}
             alt={'img'}
             src={`http://localhost:100/${track.picture}`}
-            width={120}
-            height={120}
           />
 
-          <HStack gap={'8'}>
-            <Button onClick={play}>
-              <Icon data={!active ? Play : Pause}/>
-            </Button>
-            {!active && <div>02:20/03:01</div>}
-          </HStack>
+          <Button
+            className={classNames(styles.playBtn, mods, [])}
+            onClick={play}
+          >
+            <Icon data={isActiveTrack ? Play : Pause}/>
+          </Button>
+        </div>
 
 
+        <VStack max>
+               <span>
+              {track.name}
+            </span>
+          <span className={styles.artistName}>
+              {track.artist}
+            </span>
         </VStack>
 
-        <VStack max justify={'between'}>
-          <VStack>
-             <span>
-            {track.name}
-          </span>
-            <span className={styles.artistName}>
-            {track.artist}
-          </span>
-          </VStack>
-
-
+        <HStack max gap={'8'} className={styles.trackBtn}>
+          <Button onClick={() => {
+            router.push(`/tracks/${track._id}`)
+          }}>
+            <Icon data={CircleInfo}/>
+          </Button>
           <Button onClick={deleteTrack}>
             <Icon data={TrashBin}/>
           </Button>
-        </VStack>
 
+        </HStack>
 
       </HStack>
 
-    </Card>
+      {/*</Card>*/}
+    </div>
   );
 };
 
