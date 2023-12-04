@@ -8,6 +8,7 @@ export interface PlayList {
 
 export interface PlayListSchema {
   playlists: PlayList[]
+  selectedPlaylist?: PlayList
   error?: string
   isLoading: boolean
 }

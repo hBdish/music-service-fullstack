@@ -25,6 +25,27 @@ export const fetchPlaylists = createAsyncThunk<
   }
 });
 
+export const fetchPlaylist = createAsyncThunk<
+  PlayList,
+  string,
+  ThunkConfig<string>
+>('playlist/fetchPlaylist', async (id, thunkApi) => {
+  const {extra, rejectWithValue} = thunkApi;
+
+  try {
+    const response = await extra.api.get<PlayList>(`/play-lists/${id}`);
+
+    if (!response.data) {
+      throw new Error();
+    }
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return rejectWithValue('fetch playlists error');
+  }
+});
+
 
 export const cretePlaylist = createAsyncThunk<
   PlayList,

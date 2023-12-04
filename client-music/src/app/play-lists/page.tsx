@@ -6,6 +6,7 @@ import {useAppDispatch} from "@/store/hooks/hooks";
 import {usePlaylistValue} from "@/store/slice/play-list/play-list-selector";
 import {VStack} from "@/components/stack";
 import {Loader} from "@gravity-ui/uikit";
+import styles from './play-list-page.module.css'
 
 const PlaylistsPage = () => {
   const dispatch = useAppDispatch()
@@ -24,9 +25,11 @@ const PlaylistsPage = () => {
   }
 
   return (
-    <div>
+    <VStack className={styles.page}>
       <PlayLists playlists={playlists}/>
-    </div>
+    </VStack>
+
+
   );
 };
 
