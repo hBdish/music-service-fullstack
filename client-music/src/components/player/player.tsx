@@ -1,66 +1,62 @@
 'use client'
 import React, {ChangeEvent, useEffect} from 'react';
-import {Pause, Play} from "@gravity-ui/icons";
+import {Pause, Play, Volume} from "@gravity-ui/icons";
 import {Button, Icon} from "@gravity-ui/uikit";
-import {Volume} from '@gravity-ui/icons';
 import styles from './player.module.css'
 import TrackProgress from "@/components/player/track-progress/track-progress";
-import {usePlayerValue, useVolumeValue} from "@/store/slice/player/player-selector";
+import {usePlayerValue} from "@/store/slice/player/player-selector";
 import {useActions} from "@/store/hooks/use-actions";
+import MyAudio from "@/components/player/audio";
 
-let audio: HTMLAudioElement
 
 const Player = () => {
   const {active, pause, volume, currentTime, duration} = usePlayerValue()
-
-  const {setDuration, setCurrentTime ,setVolume ,pause: setPause, play: setPlay} = useActions()
-
+  const {setDuration, setCurrentTime, setVolume, pause: setPause, play: setPlay} = useActions()
+  const player = MyAudio
   const setAudio = () => {
     if (active) {
 
-      audio.src = `http://localhost:100/${active.audio}`
-      audio.volume = volume / 100
+      player.setSrc(`http://localhost:100/${active.audio}`)
+      player.setVolume(volume / 100)
 
-      audio.onloadedmetadata = () => {
-        setDuration(Math.ceil(audio.duration))
+      player.getAudio().onloadedmetadata = () => {
+        setDuration(Math.ceil(player.getAudio().duration))
       }
 
-      audio.ontimeupdate = () => {
-        setCurrentTime(Math.ceil(audio.currentTime))
+      player.getAudio().ontimeupdate = () => {
+        setCurrentTime(Math.ceil(player.getAudio().currentTime))
       }
 
-      audio.play()
+      player.play()
     }
   }
 
   useEffect(() => {
-    if (!audio) {
-      audio = new Audio()
-    }
-      setAudio()
+    setAudio()
 
-  },[active])
-
+  }, [active])
 
 
   const onPlay = () => {
     if (pause) {
       setPlay()
-      audio?.play()
+      player.play()
     } else {
       setPause()
-      audio?.pause()
+      player.pause()
     }
   }
 
   const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
     setVolume(Number(e.target.value))
-    audio.volume = Number(e.target.value) / 100
+    player.setVolume(Number(e.target.value) / 100)
   }
 
   const changeCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
-    setCurrentTime(Number(e.target.value))
-    audio.currentTime = Number(e.target.value)
+    const currentTime = Number(e.target.value)
+
+    setCurrentTime(currentTime)
+    player.setCurrentTime(currentTime)
   }
 
   if (!active) {
@@ -70,7 +66,7 @@ const Player = () => {
   return (
     <div className={styles.player}>
       <Button onClick={onPlay}>
-        <Icon  data={pause ? Play : Pause}/>
+        <Icon data={pause ? Play : Pause}/>
       </Button>
       <div className={styles.naming}>
           <span>
@@ -81,7 +77,7 @@ const Player = () => {
           </span>
       </div>
       <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
-      <Icon data={Volume} className={styles.volume} />
+      <Icon data={Volume} className={styles.volume}/>
       <TrackProgress left={volume} right={100} onChange={changeVolume}/>
     </div>
   );

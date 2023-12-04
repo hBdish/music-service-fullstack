@@ -67,3 +67,26 @@ export const fetchTrack = createAsyncThunk<
     return rejectWithValue('fetch track error');
   }
 });
+
+export const deleteTrack = createAsyncThunk<
+  string,
+  string,
+  ThunkConfig<string>
+>('tracks/deleteTrack', async (id, thunkApi) => {
+  const {extra, rejectWithValue, dispatch} = thunkApi;
+
+  try {
+    const response = await extra.api.delete<string>(`/tracks/` + id);
+
+    if (!response.data) {
+      throw new Error();
+    }
+
+    dispatch(fetchTracks())
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return rejectWithValue('fetch track error');
+  }
+});

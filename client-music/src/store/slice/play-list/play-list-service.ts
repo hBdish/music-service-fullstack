@@ -24,3 +24,54 @@ export const fetchPlaylists = createAsyncThunk<
     return rejectWithValue('fetch playlists error');
   }
 });
+
+
+export const cretePlaylist = createAsyncThunk<
+  PlayList,
+  string,
+  ThunkConfig<string>
+>('playlist/cretePlayList', async (name, thunkApi) => {
+  const {extra, rejectWithValue, dispatch} = thunkApi;
+
+  try {
+    const response = await extra.api.post<PlayList>(`/play-lists`, {
+      name
+    });
+
+    if (!response.data) {
+      throw new Error();
+    }
+
+    dispatch(fetchPlaylists())
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return rejectWithValue('fetch playlists error');
+  }
+
+});
+
+export const deletePlaylist = createAsyncThunk<
+  string,
+  string,
+  ThunkConfig<string>
+>('playlist/deletePlaylist', async (id, thunkApi) => {
+  const {extra, rejectWithValue, dispatch} = thunkApi;
+
+  try {
+    const response = await extra.api.delete<string>(`/play-lists/${id}`);
+
+    if (!response.data) {
+      throw new Error();
+    }
+
+    dispatch(fetchPlaylists())
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return rejectWithValue('fetch playlists error');
+  }
+
+});

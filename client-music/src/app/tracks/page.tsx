@@ -19,7 +19,7 @@ export default function TracksPage() {
 
   useEffect(() => {
     dispatch(fetchTracks())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (timer) {
@@ -30,7 +30,7 @@ export default function TracksPage() {
       dispatch(searchTracks(search.value))
     }, 700)
 
-  }, [search.value, dispatch]);
+  }, [search.value]);
 
   if (isLoading || !tracks) {
     return (

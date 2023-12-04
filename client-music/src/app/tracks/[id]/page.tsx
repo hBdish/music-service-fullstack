@@ -27,7 +27,7 @@ const TrackPage = (props: any) => {
         }
       )
 
-      window.location.reload()
+      window.location.reload() // TODO убрать бы, но как же лень
     } catch (e) {
       console.log(e)
     }
