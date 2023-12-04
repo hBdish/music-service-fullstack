@@ -96,3 +96,31 @@ export const deletePlaylist = createAsyncThunk<
   }
 
 });
+
+export const addTrackInPlayList = createAsyncThunk<
+  PlayList,
+  {
+    trackId: string,
+    playListId: string
+  },
+  ThunkConfig<string>
+>('playlist/fetchAllPlaylists', async (props, thunkApi) => {
+  const {extra, rejectWithValue} = thunkApi;
+  const {trackId, playListId} = props
+
+  try {
+    const response = await extra.api.patch<PlayList>(`/play-lists`, {
+      trackId,
+      playListId
+    });
+
+    if (!response.data) {
+      throw new Error();
+    }
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return rejectWithValue('fetch playlists error');
+  }
+});

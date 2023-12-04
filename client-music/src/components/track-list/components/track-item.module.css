@@ -41,9 +41,8 @@
 
 
 .playBtn {
-    position: sticky;
-    left: 16px;
-    bottom: 48px;
+    left: 14px;
+    bottom: 46px;
     opacity: 0;
 }
 
@@ -56,8 +55,7 @@
     opacity: 1;
 }
 
-
 .trackBtn {
     padding-right: 8px;
-    justify-content: end;
+    justify-content: center;
 }
