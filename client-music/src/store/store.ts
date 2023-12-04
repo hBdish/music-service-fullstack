@@ -4,11 +4,13 @@ import {tracksReducer} from "@/store/slice/track/tracks-slice";
 import {$api} from "@/api/api";
 import {StateSchema, ThunkExtraArg} from "@/store/types/types";
 import {createTrackReducer} from "@/store/slice/create-track/create-track-slice";
+import {playlistReducer} from "@/store/slice/play-list/play-list-slice";
 
 const rootReducers: ReducersMapObject<StateSchema> = {
   player: playerReducer,
   tracks: tracksReducer,
   createTrack: createTrackReducer,
+  playlists: playlistReducer
 }
 
 const extraArg: ThunkExtraArg = {

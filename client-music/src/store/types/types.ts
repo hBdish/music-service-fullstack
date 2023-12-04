@@ -1,11 +1,13 @@
-import {Player} from "@/types/player";
-import {CreateTrack, Tracks} from "@/types/tracks";
+import {PlayerSchema} from "@/types/player";
+import {CreateTrackSchema, TracksSchema} from "@/types/tracks";
 import {AxiosInstance} from "axios";
+import {PlayListSchema} from "@/types/play-list";
 
 export interface StateSchema {
-  player: Player
-  tracks: Tracks
-  createTrack: CreateTrack,
+  player: PlayerSchema
+  tracks: TracksSchema
+  createTrack: CreateTrackSchema,
+  playlists: PlayListSchema
 }
 
 export interface ThunkExtraArg {

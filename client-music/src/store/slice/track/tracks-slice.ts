@@ -1,8 +1,8 @@
-import {Tracks} from "@/types/tracks";
+import {TracksSchema} from "@/types/tracks";
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchTrack, fetchTracks, searchTracks} from "@/store/slice/track/tracks-service";
 
-const initialState: Tracks = {
+const initialState: TracksSchema = {
   tracks: [],
   track: undefined,
   error: undefined,

@@ -15,13 +15,13 @@ export interface Track {
   comments?: Comment[]
 }
 
-export interface CreateTrack {
+export interface CreateTrackSchema {
   name: string
   text: string
   artist: string
 }
 
-export interface Tracks {
+export interface TracksSchema {
   tracks: Track[]
   track?: Track
   error?: string

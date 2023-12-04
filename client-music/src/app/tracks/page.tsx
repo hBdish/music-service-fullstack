@@ -10,7 +10,7 @@ import {useInput} from "@/lib/hooks/use-input";
 import {HStack, VStack} from "@/components/stack";
 
 
-export default function Tracks() {
+export default function TracksPage() {
   const dispatch = useAppDispatch()
   const {tracks, isLoading} = useTrackValue()
   const search = useInput('')

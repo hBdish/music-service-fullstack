@@ -1,6 +1,6 @@
 import {Track} from "@/types/tracks";
 
-export interface Player {
+export interface PlayerSchema {
   active: null | Track
   volume: number
   duration: number

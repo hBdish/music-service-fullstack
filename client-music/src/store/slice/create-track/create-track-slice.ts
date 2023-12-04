@@ -1,8 +1,8 @@
 'use client'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {CreateTrack} from "@/types/tracks";
+import {CreateTrackSchema} from "@/types/tracks";
 
-const initialState: CreateTrack = {
+const initialState: CreateTrackSchema = {
   artist: "",
   name: "",
   text: ""

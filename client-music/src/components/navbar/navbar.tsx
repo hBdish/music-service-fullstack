@@ -8,7 +8,7 @@ import {HStack} from "@/components/stack";
 const menuItem = [
   {text: 'Главная', href: '/', icons: House},
   {text: 'Список треков', href: '/tracks', icons: MusicNote},
-  {text: 'Список альбомов', href: '/albums'},
+  {text: 'Плейлисты', href: '/play-lists'},
 ]
 
 export default function Navbar() {

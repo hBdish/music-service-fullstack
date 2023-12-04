@@ -1,9 +1,9 @@
 'use client'
-import {Player} from "@/types/player";
+import {PlayerSchema} from "@/types/player";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Track} from "@/types/tracks";
 
-const initialState: Player = {
+const initialState: PlayerSchema = {
   active: null,
   currentTime: 0,
   duration: 0,
@@ -15,22 +15,22 @@ export const playerSlice = createSlice({
   name: 'playerSlice',
   initialState,
   reducers: {
-    pause(state){
+    pause(state) {
       state.pause = true
     },
-    play(state){
+    play(state) {
       state.pause = false
     },
-    setVolume(state, {payload}: PayloadAction<number>){
+    setVolume(state, {payload}: PayloadAction<number>) {
       state.volume = payload
     },
-    setCurrentTime(state, {payload}: PayloadAction<number>){
+    setCurrentTime(state, {payload}: PayloadAction<number>) {
       state.currentTime = payload
     },
-    setDuration(state, {payload}: PayloadAction<number>){
+    setDuration(state, {payload}: PayloadAction<number>) {
       state.duration = payload
     },
-    setActiveTrack(state, {payload}: PayloadAction<Track>){
+    setActiveTrack(state, {payload}: PayloadAction<Track>) {
       state.active = payload
       state.duration = 0
       state.currentTime = 0
@@ -39,9 +39,10 @@ export const playerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // and provide a default case if no other handlers matched
-      .addDefaultCase((state, action) => {})
+      .addDefaultCase((state, action) => {
+      })
   },
 })
 
-export const { actions: playerActions } = playerSlice;
-export const { reducer: playerReducer } = playerSlice;
+export const {actions: playerActions} = playerSlice;
+export const {reducer: playerReducer} = playerSlice;
