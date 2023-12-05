@@ -6,12 +6,17 @@ import { Comment, CommentDocument } from './schemas/comment.schema';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { FileService, FileType } from '../file/file.service';
+import {
+  PlayList,
+  PlayListDocument,
+} from '../play-list/schemas/play-list.schema';
 
 @Injectable()
 export class TrackService {
   constructor(
     @InjectModel(Track.name) private trackModel: Model<TrackDocument>,
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
+    @InjectModel(PlayList.name) private playlistModel: Model<PlayListDocument>,
     private fileService: FileService,
   ) {}
 

@@ -19,6 +19,13 @@ export class PlayListService {
     return playLists;
   }
 
+  async getPlaylist(id: ObjectId): Promise<PlayList> {
+    const playList = await this.playListModel.findById(id).populate('tracks');
+    console.log(playList);
+
+    return playList;
+  }
+
   async create(dto: CreatePlayListDto): Promise<PlayList> {
     const playList = await this.playListModel.create({ ...dto });
 
@@ -51,7 +58,6 @@ export class PlayListService {
       .findById(dto.playListId)
       .populate('tracks');
     const track = await this.trackModel.findById(dto.trackId);
-
     const newTracks = playList.tracks.filter((el) => el?.['id'] !== track.id);
 
     playList.tracks = newTracks;

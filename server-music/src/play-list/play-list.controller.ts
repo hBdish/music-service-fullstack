@@ -21,6 +21,11 @@ export class PlayListController {
     return this.playListService.getAll();
   }
 
+  @Get(':id')
+  getPlaylist(@Param('id') id: ObjectId) {
+    return this.playListService.getPlaylist(id);
+  }
+
   @Post()
   create(@Body() dto: CreatePlayListDto) {
     return this.playListService.create(dto);
