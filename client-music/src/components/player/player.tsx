@@ -3,10 +3,12 @@ import React, {ChangeEvent, useEffect} from 'react';
 import {Pause, Play, Volume} from "@gravity-ui/icons";
 import {Button, Icon} from "@gravity-ui/uikit";
 import styles from './player.module.css'
-import TrackProgress from "@/components/player/track-progress/track-progress";
 import {usePlayerValue} from "@/store/slice/player/player-selector";
 import {useActions} from "@/store/hooks/use-actions";
 import MyAudio from "@/components/player/audio";
+import TrackProgress from "@/components/player/track-progress/track-progress";
+import {HStack} from "@/components/stack";
+import TrackVolume from "@/components/player/track-volume/track-volume";
 
 
 const Player = () => {
@@ -33,7 +35,6 @@ const Player = () => {
 
   useEffect(() => {
     setAudio()
-
   }, [active])
 
 
@@ -65,20 +66,24 @@ const Player = () => {
 
   return (
     <div className={styles.player}>
-      <Button onClick={onPlay}>
-        <Icon data={pause ? Play : Pause}/>
-      </Button>
-      <div className={styles.naming}>
+      <HStack gap={'8'}>
+        <Button onClick={onPlay}>
+          <Icon data={pause ? Play : Pause}/>
+        </Button>
+        <div className={styles.naming}>
           <span>
             {active?.name}
           </span>
-        <span className={styles.artistName}>
+          <span className={styles.artistName}>
             {active?.artist}
           </span>
-      </div>
-      <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
-      <Icon data={Volume} className={styles.volume}/>
-      <TrackProgress left={volume} right={100} onChange={changeVolume}/>
+        </div>
+        <TrackProgress left={currentTime} right={duration} onChange={changeCurrentTime}/>
+      </HStack>
+      <HStack gap={'8'}>
+        <Icon data={Volume} className={styles.volume}/>
+        <TrackVolume left={volume} right={100} onChange={changeVolume}/>
+      </HStack>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const PlayLists = (props: PlayLists) => {
   const {playlists} = props
 
   return (
-    
+
     <VStack gap={'16'} max align={"center"}>
       <CreatePlayList/>
       {

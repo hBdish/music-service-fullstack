@@ -5,6 +5,8 @@ import styles from './play-list-item.module.css'
 import {CircleInfo, TrashBin} from "@gravity-ui/icons";
 import {HStack, VStack} from "@/components/stack";
 import {useRouter} from "next/navigation";
+import {useAppDispatch} from "@/store/hooks/hooks";
+import {deletePlaylist} from "@/store/slice/play-list/play-list-service";
 
 interface PlayListItem {
   playlist: PlayList
@@ -13,6 +15,7 @@ interface PlayListItem {
 const PlayListItem = (props: PlayListItem) => {
   const {playlist} = props
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
   return (
     <Card className={styles.card}>
@@ -24,7 +27,9 @@ const PlayListItem = (props: PlayListItem) => {
           }} view={'outlined-info'}>
             <Icon data={CircleInfo}/>
           </Button>
-          <Button view={'outlined-danger'}>
+          <Button onClick={() => {
+            dispatch(deletePlaylist(playlist._id))
+          }} view={'outlined-danger'}>
             <Icon data={TrashBin}/>
           </Button>
         </HStack>

@@ -1,13 +1,12 @@
 import React, {ChangeEvent} from 'react';
-import {convertTrackTime} from "@/lib/helpers/convert-track-time";
 
-interface TrackProgress {
+interface TrackVolume {
   left: number
   right: number
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const TrackProgress = (props: TrackProgress) => {
+const TrackVolume = (props: TrackVolume) => {
   const {left, right, onChange} = props
   return (
     <div style={{display: "flex"}}>
@@ -18,9 +17,9 @@ const TrackProgress = (props: TrackProgress) => {
         type={"range"}
         onChange={onChange}
       />
-      <div>{convertTrackTime(left)} / {convertTrackTime(right)}</div>
+      <span style={{width: "60px"}}>{left} / {right}</span>
     </div>
   );
 };
 
-export default TrackProgress;
+export default TrackVolume;
