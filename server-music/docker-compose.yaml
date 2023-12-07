@@ -10,4 +10,20 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: db_music
+    networks:
+      - internal_net
 
+#  back_music:
+#    build: ./
+#    container_name: back_music
+#    ports:
+#      - "100:100"
+#    environment:
+#      - MONGO_URL=mongodb://admin:root@127:0:0:1:101/db_music?authSource=admin
+#    depends_on:
+#      - db_music
+#    networks:
+#      - internal_net
+
+networks:
+  internal_net:

@@ -7,6 +7,11 @@ $ npm ci
 ## Running the app
 
 ```bash
+# first
+$ docker-compose up
+```
+
+```bash
 # development
 $ npm run start
 

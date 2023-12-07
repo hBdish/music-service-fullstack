@@ -5,6 +5,7 @@ import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
 import { PlayListModule } from './play-list/play-list.module';
+import * as process from 'process';
 
 @Module({
   imports: [
@@ -14,9 +15,7 @@ import { PlayListModule } from './play-list/play-list.module';
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
     }),
-    MongooseModule.forRoot(
-      'mongodb://admin:root@127.0.0.1:101/db_music?authSource=admin', // TODO вынести в env
-    ),
+    MongooseModule.forRoot(process.env.MONGO_URL),
   ],
 })
 export class AppModule {}
