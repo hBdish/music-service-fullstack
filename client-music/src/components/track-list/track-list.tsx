@@ -7,10 +7,12 @@ import {Card} from "@gravity-ui/uikit";
 
 interface TrackListProps {
   tracks: Track[]
+  playListId?: string
 }
 
 
 const TrackList: FC<TrackListProps> = (props) => {
+  const {tracks, playListId} = props
 
   return (
 
@@ -18,8 +20,8 @@ const TrackList: FC<TrackListProps> = (props) => {
       <Card
         className={styles.cardBody}
       >
-        {props.tracks.map((el) =>
-          <TrackItem activeId={el._id} key={el._id} track={el}/>
+        {tracks.map((el) =>
+          <TrackItem playListId={playListId} activeId={el._id} key={el._id} track={el}/>
         )}
       </Card>
     </VStack>

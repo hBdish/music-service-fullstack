@@ -15,7 +15,7 @@ const PlaylistPage = (props: any) => {
   }, []);
 
   return (
-    <TrackList tracks={selectedPlaylist?.tracks || []}/>
+    <TrackList playListId={props?.params?.id} tracks={selectedPlaylist?.tracks || []}/>
   );
 };
 

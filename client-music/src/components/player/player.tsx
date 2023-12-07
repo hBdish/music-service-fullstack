@@ -16,6 +16,7 @@ const Player = () => {
   const {setDuration, setCurrentTime, setVolume, pause: setPause, play: setPlay} = useActions()
   const player = MyAudio
   const setAudio = () => {
+    
     if (active) {
 
       player.setSrc(`http://localhost:100/${active.audio}`)

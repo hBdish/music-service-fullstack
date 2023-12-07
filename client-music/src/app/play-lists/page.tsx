@@ -29,7 +29,6 @@ const PlaylistsPage = () => {
       <PlayLists playlists={playlists}/>
     </VStack>
 
-
   );
 };
 
