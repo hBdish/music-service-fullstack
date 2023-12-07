@@ -2,8 +2,7 @@ import {HStack, VStack} from "@/components/stack";
 import {Button} from "@/lib/mui";
 
 export default function Home() {
-
-
+  
   return (
     <VStack gap={'24'} max align={"center"} justify={"center"}>
       <h2>PET PROJECT</h2>
