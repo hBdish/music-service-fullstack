@@ -1,16 +1,14 @@
-import {ChangeEvent, useState} from "react";
-import {type} from "os";
-import {instanceOf} from "prop-types";
+import { useState } from 'react';
 
 export const useInput = (initialValue: string) => {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue);
 
   const onChange = (value: string) => {
-
-   setValue(value)
-  }
+    setValue(value);
+  };
 
   return {
-    value, onChange
-  }
-}
+    value,
+    onChange,
+  };
+};
