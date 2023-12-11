@@ -1,19 +1,6 @@
-## Getting Started
+### The initial project for the development of React applications.
+* The module builder is Webpack.
+* The main language is TypeScript.
+* The Sass preprocessor is used.
 
-Install dependencies:
-
-```bash
-npm ci
-```
-
-Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> Documentation in development 💅
