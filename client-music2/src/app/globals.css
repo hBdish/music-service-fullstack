@@ -1,0 +1,39 @@
+@import '@gravity-ui/uikit/styles/fonts.css';
+@import '@gravity-ui/uikit/styles/styles.css';
+
+:root {
+    --navbar-height: 32px;
+    --header-height: 60px;
+    --player-height: 60px;
+    --content-height: calc(100vh - var(--navbar-height) - var(--header-height) - var(--player-height));
+}
+
+.app {
+    height: var(--content-height);
+    width: 100vw;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style-type: none;
+}
+
+input,
+button,
+textarea,
+select {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
