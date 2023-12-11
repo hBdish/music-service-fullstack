@@ -46,7 +46,7 @@ export const searchTracks = createAsyncThunk<
   }
 });
 
-export const fetchTrack = createAsyncThunk<Track, number, ThunkConfig<string>>(
+export const fetchTrack = createAsyncThunk<Track, string, ThunkConfig<string>>(
   'tracks/fetchTrack',
   async (id, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;

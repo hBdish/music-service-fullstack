@@ -1,33 +1,25 @@
-import { HStack, VStack } from '@/shared';
-import { InputGroup } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import { HStack, useInput, VStack } from '@/shared';
+import { fetchPlaylists, usePlaylistLoading } from '@/entities';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/shared/hooks/use-app-store';
 
 const PlayListsPage = () => {
+  const isLoading = usePlaylistLoading();
+  const dispatch = useAppDispatch();
+  const search = useInput('');
+
+  useEffect(() => {
+    dispatch(fetchPlaylists());
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
   return (
     <VStack>
-      <HStack style={{ paddingTop: '8px' }} max justify={'center'}>
-        <h2>Список треков</h2>
-      </HStack>
-
-      <HStack
-        style={{ paddingTop: '8px' }}
-        gap={'16'}
-        max
-        align={'center'}
-        justify={'center'}
-      >
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-          <Form.Control
-            placeholder="Username"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            // value={search.value}
-            onChange={(e) => {
-              // search.onChange(e.target.value);
-            }}
-          />
-        </InputGroup>
+      <HStack max justify={'center'}>
+        <h2>Плейлисты</h2>
       </HStack>
 
       {/*<TrackList tracks={tracks} />*/}
