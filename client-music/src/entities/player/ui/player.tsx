@@ -1,5 +1,12 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import { HStack, myAudio, PauseIcon, PlayIcon, useActions } from '@/shared';
+import {
+  HStack,
+  myAudio,
+  PauseIcon,
+  PlayIcon,
+  useActions,
+  VolumeIcon,
+} from '@/shared';
 import styles from './player.module.css';
 import { Button } from 'react-bootstrap';
 import TrackProgress from './components/track-progress/track-progress';
@@ -90,29 +97,11 @@ const Player = () => {
         />
       </HStack>
       <HStack gap={'8'}>
-        <div className={styles.volume}>volume</div>
+        <VolumeIcon />
+
         <TrackVolume left={volume} right={100} onChange={changeVolume} />
       </HStack>
     </HStack>
-
-    // <div className={styles.player}>
-    //   <HStack gap={'8'}>
-    //     <Button onClick={onPlay}>{pause ? <PlayIcon /> : <PauseIcon />}</Button>
-    //     <div className={styles.naming}>
-    //       <span className={'class="b-marquee__text"'}>{active?.name}</span>
-    //       <span className={styles.artistName}>{active?.artist}</span>
-    //     </div>
-    //     <TrackProgress
-    //       left={currentTime}
-    //       right={duration}
-    //       onChange={changeCurrentTime}
-    //     />
-    //   </HStack>
-    //   <HStack gap={'8'}>
-    //     <div className={styles.volume}>volume</div>
-    //     <TrackVolume left={volume} right={100} onChange={changeVolume} />
-    //   </HStack>
-    // </div>
   );
 };
 

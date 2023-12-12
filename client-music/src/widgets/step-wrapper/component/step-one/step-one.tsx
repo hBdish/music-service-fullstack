@@ -1,9 +1,12 @@
-import styles from './step-one.module.css';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import React, { ChangeEvent } from 'react';
-import { useActions, useInput } from '@/shared';
+import { useActions, useInput, VStack } from '@/shared';
 
-const StepOne = () => {
+interface StepOne {
+  className?: string;
+}
+
+const StepOne = (props: StepOne) => {
   const name = useInput('');
   const artist = useInput('');
   const text = useInput('');
@@ -16,7 +19,7 @@ const StepOne = () => {
     onBlur: () => void,
   ) => {
     return (
-      <FloatingLabel label={label}>
+      <FloatingLabel className={props.className} label={label}>
         <Form.Control
           onChange={onChange}
           onBlur={onBlur}
@@ -29,7 +32,9 @@ const StepOne = () => {
   };
 
   return (
-    <div className={styles.card}>
+    <VStack gap={'16'} align={'center'}>
+      <h5>Информация о треке</h5>
+
       {textInput(
         name.value,
         'Название трека',
@@ -54,33 +59,7 @@ const StepOne = () => {
           setText(text.value);
         },
       )}
-      {/*<TextInput*/}
-      {/*  onBlur={() => {*/}
-      {/*    setName(name.value);*/}
-      {/*  }}*/}
-      {/*  value={name.value}*/}
-      {/*  onChange={(e) => name.onChange(e.target.value)}*/}
-      {/*  label={'Название трека'}*/}
-      {/*/>*/}
-      {/*<TextInput*/}
-      {/*  onBlur={() => {*/}
-      {/*    setArtist(artist.value);*/}
-      {/*  }}*/}
-      {/*  value={artist.value}*/}
-      {/*  onChange={(e) => artist.onChange(e.target.value)}*/}
-      {/*  label={'Имя испонителя'}*/}
-      {/*/>*/}
-      {/*<TextArea*/}
-      {/*  onBlur={() => {*/}
-      {/*    setText(text.value);*/}
-      {/*  }}*/}
-      {/*  value={text.value}*/}
-      {/*  onChange={(e) => text.onChange(e.target.value)}*/}
-      {/*  rows={3}*/}
-      {/*  size={'l'}*/}
-      {/*  placeholder="Текст песнип"*/}
-      {/*/>*/}
-    </div>
+    </VStack>
   );
 };
 

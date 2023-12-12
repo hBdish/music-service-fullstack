@@ -1,8 +1,7 @@
-import { HStack, VStack } from '@/shared';
+import { HStack, useAppDispatch, VStack } from '@/shared';
 import { fetchPlaylists, usePlaylistLoading } from '@/entities';
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/shared/hooks/use-app-store';
-import StepWrapper from '@/widgets/step-wrapper/step-wrapper';
+import { StepWrapper } from '@/widgets';
 
 const PlayListsPage = () => {
   const isLoading = usePlaylistLoading();

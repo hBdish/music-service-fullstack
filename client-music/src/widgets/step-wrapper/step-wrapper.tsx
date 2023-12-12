@@ -6,11 +6,12 @@ import { FC, useState } from 'react';
 //   RadioButton,
 //   RadioButtonOption,
 // } from '@gravity-ui/uikit';
-import { Pagination } from 'react-bootstrap';
+import { Button, Pagination } from 'react-bootstrap';
 import { StepOne } from '@/widgets/step-wrapper/component/step-one/step-one';
 import { StepTwo } from '@/widgets/step-wrapper/component/step-two/step-two';
 import { StepThree } from '@/widgets/step-wrapper/component/step-three/step-three';
-import { VStack } from '@/shared';
+import { HStack, LeftIcon, RightIcon, VStack } from '@/shared';
+import styles from './step-wrapper.module.css';
 
 interface StepWrapper {
   // children: ReactNode;
@@ -28,46 +29,35 @@ interface StepWrapper {
 // ];
 
 const StepWrapper: FC<StepWrapper> = (props) => {
-  const {
-    // canCreateTrack = false,
-    // createTrack,
-    // children,
-    // stepOne,
-    // stepThree,
-    // stepTwo,
-  } = props;
+  const { canCreateTrack = false, createTrack } = props;
   const [step, setStep] = useState(1);
 
   const render = () => {
     switch (step) {
       case 1:
-        return <StepOne />;
+        return <StepOne className={styles.content} />;
       case 2:
-        return <StepTwo setFile={() => {}} />;
+        return <StepTwo className={styles.content} setFile={() => {}} />;
       case 3:
-        return <StepThree setFile={() => {}} />;
+        return <StepThree className={styles.content} setFile={() => {}} />;
     }
   };
-  //
-  // const next = () => {
-  //   setStep((prevState) => {
-  //     if (prevState === '2') return prevState;
-  //
-  //     let res = +prevState;
-  //     res += 1;
-  //     return res.toString();
-  //   });
-  // };
-  //
-  // const back = () => {
-  //   setStep((prevState) => {
-  //     if (prevState === '0') return prevState;
-  //
-  //     let res = +prevState;
-  //     res -= 1;
-  //     return res.toString();
-  //   });
-  // };
+
+  const next = () => {
+    setStep((prevState) => {
+      if (prevState === 3) return prevState;
+
+      return ++prevState;
+    });
+  };
+
+  const back = () => {
+    setStep((prevState) => {
+      if (prevState === 1) return prevState;
+
+      return --prevState;
+    });
+  };
 
   const items = [];
   for (let number = 1; number <= 3; number++) {
@@ -85,54 +75,26 @@ const StepWrapper: FC<StepWrapper> = (props) => {
   }
 
   return (
-    <VStack max align={'center'} justify={'between'}>
-      {render()}
-      <Pagination style={{ justifySelf: 'end' }} size="lg">
-        {items}
-      </Pagination>
-    </VStack>
+    <HStack max>
+      <Button variant={'dark'} onClick={back}>
+        <LeftIcon />
+      </Button>
+      <VStack max align={'center'} justify={'between'}>
+        {render()}
+        <VStack align={'center'} gap={'24'}>
+          <Button onClick={createTrack} disabled={!canCreateTrack}>
+            Добавить трек
+          </Button>
+          <Pagination className={styles.radioButton} size="lg">
+            {items}
+          </Pagination>
+        </VStack>
+      </VStack>
+      <Button variant={'dark'} onClick={next}>
+        <RightIcon />
+      </Button>
+    </HStack>
   );
 };
 
-export default StepWrapper;
-
-// // <div className={styles.page}>
-// {/*<HStack max align={'center'} justify={'between'}>*/}
-// {/*  <Button disabled={step === '0'} onClick={back} view={'action'}>*/}
-// {/*    <Icon data={ChevronLeft} />*/}
-// {/*  </Button>*/}
-// {/*  <Card className={styles.card}>*/}
-// {/*    <VStack gap={'24'}>*/}
-// {/*      {children}*/}
-// {/*      {render()}*/}
-// {/*      <Button disabled={!canCreateTrack} onClick={createTrack}>*/}
-// {/*        Создать трек*/}
-// {/*      </Button>*/}
-// {/*    </VStack>*/}
-// {/*  </Card>*/}
-// {/*  <Button disabled={step === '2'} onClick={next} view={'action'}>*/}
-// {/*    <Icon data={ChevronRight} />*/}
-// {/*  </Button>*/}
-// {/*</HStack>*/}
-//
-// {/*<RadioButton*/}
-// {/*  className={styles.radioButton}*/}
-// {/*  options={options}*/}
-// {/*  onUpdate={(value) => setStep(value)}*/}
-// {/*  value={options[+step].value}*/}
-// {/*  size="xl"*/}
-// {/*>*/}
-// {/*  <RadioButton.Option*/}
-// {/*    content={options[0].content}*/}
-// {/*    value={options[0].value}*/}
-// {/*  />*/}
-// {/*  <RadioButton.Option*/}
-// {/*    content={options[1].content}*/}
-// {/*    value={options[1].value}*/}
-// {/*  />*/}
-// {/*  <RadioButton.Option*/}
-// {/*    content={options[2].content}*/}
-// {/*    value={options[2].value}*/}
-// {/*  />*/}
-// {/*</RadioButton>*/}
-// // </div>
+export { StepWrapper };
