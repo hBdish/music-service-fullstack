@@ -1,17 +1,24 @@
 .table {
-    padding-top: 20px;
-    padding-bottom: 40px;
     height: var(--content-height);
-    max-height: 368px;
-    overflow: auto;
+    max-height: 370px;
+
+    @media screen and (width < 600px) {
+        max-height: 740px;
+    }
 }
 
 
 .cardBody {
     height: var(--content-height);
-    padding: 16px;
     display: grid;
     gap: 16px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(4, 1fr);
+
+    @media screen and (width < 600px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(8, 1fr);
+    }
+
 }
+

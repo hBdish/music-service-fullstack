@@ -1,0 +1,6 @@
+.inp {
+    @media screen and (width < 660px) {
+        width: 80px;
+
+    }
+}

@@ -22,7 +22,7 @@ const ImgButton = (props: ImgButtonProps) => {
     imgSrc,
     active = false,
   } = props;
-  console.log(active);
+
   return (
     <div
       style={style}

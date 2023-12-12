@@ -1,12 +1,13 @@
-import { HStack, useInput, VStack } from '@/shared';
+import { HStack, VStack } from '@/shared';
 import { fetchPlaylists, usePlaylistLoading } from '@/entities';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/shared/hooks/use-app-store';
+import StepWrapper from '@/widgets/step-wrapper/step-wrapper';
 
 const PlayListsPage = () => {
   const isLoading = usePlaylistLoading();
   const dispatch = useAppDispatch();
-  const search = useInput('');
+  // const search = useInput('');
 
   useEffect(() => {
     dispatch(fetchPlaylists());
@@ -17,11 +18,11 @@ const PlayListsPage = () => {
   }
 
   return (
-    <VStack>
-      <HStack max justify={'center'}>
+    <VStack max align={'start'}>
+      <HStack style={{ height: '60px' }} max justify={'center'} align={'start'}>
         <h2>Плейлисты</h2>
       </HStack>
-
+      <StepWrapper createTrack={() => {}} />
       {/*<TrackList tracks={tracks} />*/}
     </VStack>
   );

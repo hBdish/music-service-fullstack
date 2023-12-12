@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { convertTrackTime } from '@/shared';
+import styles from './track-progress.module.css';
 
 interface TrackProgress {
   left: number;
@@ -12,6 +13,7 @@ const TrackProgress = (props: TrackProgress) => {
   return (
     <div style={{ display: 'flex' }}>
       <input
+        className={styles.inp}
         min={0}
         max={right}
         value={left}

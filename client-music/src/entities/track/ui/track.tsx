@@ -10,7 +10,7 @@ interface TrackProps {
 }
 
 const Track = (props: TrackProps) => {
-  const { track, playListId } = props;
+  const { track } = props;
   const player = myAudio;
   const { play: playTrack, pause: pauseTrack, setActiveTrack } = useActions();
   const activeTrack = useActiveTrack();

@@ -1,7 +1,7 @@
-import Track from '@/entities/track/ui/track';
 import { useEffect } from 'react';
 import { fetchTracks, useTracks } from '@/entities';
 import { useAppDispatch } from '@/shared';
+import { TrackList } from '@/widgets/track-list/track-list';
 
 const TracksPage = () => {
   const dispatch = useAppDispatch();
@@ -13,9 +13,7 @@ const TracksPage = () => {
 
   return (
     <>
-      {tracks.map((track) => (
-        <Track key={track._id} track={track} />
-      ))}
+      <TrackList tracks={tracks} />
     </>
   );
 };
