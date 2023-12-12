@@ -1,0 +1,49 @@
+.player {
+    height: var(--player-height);
+    width: 100%;
+    background: var(--bg-player);
+    position: fixed;
+    bottom: 0;
+    padding: 0 10px;
+    color: var(--text-light-dark-color);
+}
+
+.naming {
+    display: grid;
+
+    font-size: 16px;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.artistName {
+    font-size: 12px;
+    color: var(--text-dark-color);
+
+}
+
+.volume {
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+
+/*TODO плывущая строка*/
+/*.naming span {*/
+/*    text-align: center;*/
+/*    color: #fff;*/
+/*    text-transform: uppercase;*/
+/*    animation: text 6s infinite linear;*/
+/*}*/
+
+/*@keyframes text {*/
+/*    0% {*/
+/*        transform: translate(0, 0);*/
+/*    }*/
+
+/*    100% {*/
+/*        transform: translate(-160%, 0);*/
+/*    }*/
+/*}*/

@@ -1,0 +1,14 @@
+.card {
+    width: 260px;
+    height: 64px;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+.isFocused {
+    background: red;
+}
+
+.isActive {
+    background: yellow;
+}

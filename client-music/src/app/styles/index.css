@@ -1,13 +1,26 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'reset.css';
 
 :root {
     --navbar-height: 32px;
     --header-height: 60px;
     --player-height: 60px;
     --content-height: calc(100vh - var(--navbar-height) - var(--header-height) - var(--player-height));
+
+    --text-light-dark-color: #dee2e6;
+    --text-dark-color: #b3b3b6;
+    --main-bg: #212529;
+    --card-bg: #495057;
+    --card-bg-active: #6c757d;
+    --card-bg-hovered: #adb5bd;
+    --bg-player: #333232;
 }
 
 .app {
-    height: var(--content-height);
+    height: 100vh;
     width: 100vw;
+    background: var(--main-bg);
+    color: var(--text-light-dark-color);
+    padding: 0 24px var(--player-height) 24px;
+    
 }
