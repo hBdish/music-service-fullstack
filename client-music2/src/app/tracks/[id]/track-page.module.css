@@ -1,0 +1,11 @@
+.main {
+    display: grid;
+    justify-content: space-between;
+    margin: 16px;
+    gap: 16px;
+}
+
+.header {
+    display: grid;
+    gap: 16px;
+}

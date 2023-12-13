@@ -1,6 +1,7 @@
 import {
   AppRoutes,
   AppRoutesProps,
+  getRouteCreateTrack,
   getRouteMain,
   getRoutePlaylists,
   getRouteTracks,
@@ -8,6 +9,7 @@ import {
 import { TracksPage } from '@/pages/tracks';
 import { PlayListsPage } from '@/pages/play-lists';
 import { MainPage } from '@/pages/main-page';
+import { CreateTrackPage } from '@/pages/create-track-page/create-track-page';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -21,5 +23,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PLAYLISTS]: {
     path: getRoutePlaylists(),
     element: <PlayListsPage />,
+  },
+  [AppRoutes.CREATE_TRACK]: {
+    path: getRouteCreateTrack(),
+    element: <CreateTrackPage />,
   },
 };

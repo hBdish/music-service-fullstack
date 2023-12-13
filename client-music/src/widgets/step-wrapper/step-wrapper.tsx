@@ -1,11 +1,4 @@
 import { FC, useState } from 'react';
-// import {
-//   Button,
-//   Card,
-//   Icon,
-//   RadioButton,
-//   RadioButtonOption,
-// } from '@gravity-ui/uikit';
 import { Button, Pagination } from 'react-bootstrap';
 import { StepOne } from '@/widgets/step-wrapper/component/step-one/step-one';
 import { StepTwo } from '@/widgets/step-wrapper/component/step-two/step-two';
@@ -14,19 +7,11 @@ import { HStack, LeftIcon, RightIcon, VStack } from '@/shared';
 import styles from './step-wrapper.module.css';
 
 interface StepWrapper {
-  // children: ReactNode;
-  // stepOne?: ReactNode;
-  // stepTwo?: ReactNode;
-  // stepThree?: ReactNode;
+  setPicture: (file: File) => void;
+  setAudio: (file: File) => void;
   createTrack: () => void;
   canCreateTrack?: boolean;
 }
-
-// const options: RadioButtonOption[] = [
-//   { value: '0', content: 'Загрузите трек' },
-//   { value: '1', content: 'Загрузите обложку' },
-//   { value: '2', content: 'Информация о треке' },
-// ];
 
 const StepWrapper: FC<StepWrapper> = (props) => {
   const { canCreateTrack = false, createTrack } = props;
@@ -37,9 +22,13 @@ const StepWrapper: FC<StepWrapper> = (props) => {
       case 1:
         return <StepOne className={styles.content} />;
       case 2:
-        return <StepTwo className={styles.content} setFile={() => {}} />;
+        return (
+          <StepTwo className={styles.content} setFile={props.setPicture} />
+        );
       case 3:
-        return <StepThree className={styles.content} setFile={() => {}} />;
+        return (
+          <StepThree className={styles.content} setFile={props.setAudio} />
+        );
     }
   };
 

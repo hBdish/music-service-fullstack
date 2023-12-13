@@ -1,7 +1,6 @@
 import { HStack, useAppDispatch, VStack } from '@/shared';
 import { fetchPlaylists, usePlaylistLoading } from '@/entities';
 import { useEffect } from 'react';
-import { StepWrapper } from '@/widgets';
 
 const PlayListsPage = () => {
   const isLoading = usePlaylistLoading();
@@ -21,7 +20,7 @@ const PlayListsPage = () => {
       <HStack style={{ height: '60px' }} max justify={'center'} align={'start'}>
         <h2>Плейлисты</h2>
       </HStack>
-      <StepWrapper createTrack={() => {}} />
+
       {/*<TrackList tracks={tracks} />*/}
     </VStack>
   );

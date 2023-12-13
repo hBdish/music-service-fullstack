@@ -1,8 +1,9 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { Navbar as NavbarBoostrap } from 'react-bootstrap';
+import { Button, Navbar as NavbarBoostrap } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import {
+  getRouteCreateTrack,
   getRouteMain,
   getRoutePlaylists,
   getRouteTracks,
@@ -30,13 +31,23 @@ export function Navbar() {
                 navigate(el.href);
               }}
             >
-              <HStack gap={'4'} max>
+              <HStack className={'m'} gap={'4'} max>
                 {el.icons}
                 {el.text}
               </HStack>
             </Nav.Link>
           ))}
         </Nav>
+      </Container>
+      <Container className={'justify-content-end'}>
+        <Button
+          onClick={() => {
+            navigate(getRouteCreateTrack());
+          }}
+          variant={'outline-warning'}
+        >
+          Добавить трек
+        </Button>
       </Container>
     </NavbarBoostrap>
   );
