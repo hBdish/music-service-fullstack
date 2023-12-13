@@ -1,6 +1,12 @@
 import styles from './play-list-item.module.css';
 import { useNavigate } from 'react-router-dom';
-import { HStack, useAppDispatch, VStack } from '@/shared';
+import {
+  getRoutePlaylistsItem,
+  HStack,
+  InfoIcon,
+  TrashIcon,
+  useAppDispatch,
+} from '@/shared';
 import { deletePlaylist, PlayList } from '@/entities';
 import { Button } from 'react-bootstrap';
 
@@ -15,16 +21,16 @@ const PlayListItem = (props: PlayListItem) => {
 
   return (
     <div className={styles.card}>
-      <VStack max gap={'24'} align={'center'} justify={'center'}>
-        {playlist.name}
-        <HStack gap={'16'}>
+      <HStack max gap={'8'} align={'center'} justify={'between'}>
+        <span className={styles.name}>{playlist.name}</span>
+        <HStack max gap={'8'} justify={'end'}>
           <Button
             onClick={() => {
-              navigate(`/play-lists/${playlist._id}`);
+              navigate(getRoutePlaylistsItem(playlist._id));
             }}
             variant={'outline-info'}
           >
-            {/*<Icon data={CircleInfo} />*/} i
+            <InfoIcon />
           </Button>
           <Button
             onClick={() => {
@@ -32,10 +38,10 @@ const PlayListItem = (props: PlayListItem) => {
             }}
             variant={'outline-danger'}
           >
-            {/*<Icon data={TrashBin} />*/}Del
+            <TrashIcon />
           </Button>
         </HStack>
-      </VStack>
+      </HStack>
     </div>
   );
 };

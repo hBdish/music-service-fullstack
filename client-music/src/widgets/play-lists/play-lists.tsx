@@ -1,17 +1,29 @@
-import { CreatePlayList, PlayList, PlayListItem } from '@/entities';
+import {
+  CreatePlayList,
+  PlayListItem,
+  usePlaylistLoading,
+  usePlaylists,
+} from '@/entities';
 import { VStack } from '@/shared';
 
-interface PlayLists {
-  playlists: PlayList[];
-}
+interface PlayLists {}
 
-const PlayLists = (props: PlayLists) => {
-  const { playlists } = props;
+const PlayLists = () => {
+  const isLoading = usePlaylistLoading();
+  const playlists = usePlaylists();
+
+  if (isLoading) {
+    return <>Loading</>;
+  }
 
   return (
     <VStack gap={'16'} max align={'center'}>
       <CreatePlayList />
-      {playlists?.map((el) => <PlayListItem key={el._id} playlist={el} />)}
+      {Array.isArray(playlists) ? (
+        playlists?.map((el) => <PlayListItem key={el._id} playlist={el} />)
+      ) : (
+        <></>
+      )}
     </VStack>
   );
 };

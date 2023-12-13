@@ -1,13 +1,11 @@
 import { HStack, useAppDispatch, VStack } from '@/shared';
-import { fetchPlaylists, usePlaylistLoading, usePlaylists } from '@/entities';
+import { fetchPlaylists, usePlaylistLoading } from '@/entities';
 import { useEffect } from 'react';
 import { PlayLists } from '@/widgets';
 
 const PlayListsPage = () => {
   const isLoading = usePlaylistLoading();
   const dispatch = useAppDispatch();
-  // const search = useInput('');
-  const playlists = usePlaylists();
 
   useEffect(() => {
     dispatch(fetchPlaylists());
@@ -23,7 +21,7 @@ const PlayListsPage = () => {
         <h2>Плейлисты</h2>
       </HStack>
 
-      <PlayLists playlists={playlists} />
+      <PlayLists />
     </VStack>
   );
 };

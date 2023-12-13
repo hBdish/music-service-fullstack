@@ -1,14 +1,15 @@
 .createCard {
-    width: 120px;
-    height: 46px;
-    transition: height 0.4s;
+
+    height: 60px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 8px;
+    transition: height 0.2s, width 0.4s;
 }
 
 .cardIsFocused.cardIsFocused {
-    transition: height 0.4s;
-    height: 120px;
-}
+    transition: height 0.2s, width 0.4s;
 
-.content {
-    padding: 8px;
+    width: 240px;
+    height: 128px;
 }

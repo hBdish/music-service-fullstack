@@ -15,8 +15,7 @@ const PlayListActions = (props: PlayListActions) => {
 
   const delTrackFromPlayList = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
-    console.log(trackId)
-    console.log(playListId)
+
     dispatch(deleteTrackFromPlayList({
       trackId, playListId
     }))

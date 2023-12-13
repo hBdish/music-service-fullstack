@@ -1,4 +1,13 @@
 .card {
+    width: 240px;
+    height: 60px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.name {
     width: 120px;
-    height: 120px;
+    white-space: nowrap;
+    overflow: hidden;
 }

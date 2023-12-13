@@ -2,6 +2,7 @@ import React from 'react';
 import { useActiveTrack, useTrackPause, useTracksLoading } from '@/entities';
 import { Card, ImgButton, myAudio, useActions, VStack } from '@/shared';
 import { Track } from '../model/types/tracks';
+import { PlayListActions, TrackListActions } from './components/track-actions';
 
 interface TrackProps {
   track: Track;
@@ -10,7 +11,7 @@ interface TrackProps {
 }
 
 const Track = (props: TrackProps) => {
-  const { track } = props;
+  const { track, playListId } = props;
   const player = myAudio;
   const { play: playTrack, pause: pauseTrack, setActiveTrack } = useActions();
   const activeTrack = useActiveTrack();
@@ -53,6 +54,11 @@ const Track = (props: TrackProps) => {
         <span>{track.name}</span>
         <span>{track.artist}</span>
       </VStack>
+      {typeof playListId === 'undefined' ? (
+        <TrackListActions trackId={track._id} />
+      ) : (
+        <PlayListActions playListId={playListId} trackId={track._id} />
+      )}
     </Card>
   );
 };

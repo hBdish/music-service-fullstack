@@ -5,6 +5,9 @@ import PauseIcon from './pause-icon.svg';
 import VolumeIcon from './volume-icon.svg';
 import LeftIcon from './arrow-left-icon.svg';
 import RightIcon from './arrow-righ-icon.svg';
+import PlusIcon from './plus-icon.svg';
+import TrashIcon from './trash-icon.svg';
+import InfoIcon from './info-icon.svg';
 
 export {
   HouseIcon,
@@ -14,4 +17,7 @@ export {
   VolumeIcon,
   LeftIcon,
   RightIcon,
+  PlusIcon,
+  TrashIcon,
+  InfoIcon,
 };

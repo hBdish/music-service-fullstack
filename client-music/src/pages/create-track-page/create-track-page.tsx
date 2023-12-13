@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StepWrapper } from '@/widgets';
 import { useAppDispatch } from '@/shared';
 import { redirect } from 'react-router-dom';
@@ -8,11 +8,6 @@ const CreateTrackPage = () => {
   const [picture, setPicture] = useState<File | null>(null);
   const [audio, setAudio] = useState<File | null>(null);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    console.log(picture);
-    console.log(audio);
-  }, [picture, audio]);
 
   return (
     <StepWrapper
