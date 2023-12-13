@@ -5,7 +5,7 @@ export const [usePlaylistLoading, getPlaylistLoading] = useBuildSelector(
   (state: StateSchema) => state.playlists.isLoading,
 );
 
-export const [usePlaylist, getPlaylist] = useBuildSelector(
+export const [usePlaylists, getPlaylists] = useBuildSelector(
   (state: StateSchema) => state.playlists.playlists,
 );
 
