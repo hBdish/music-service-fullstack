@@ -1,8 +1,7 @@
 import styles from './add-in-play-list.module.css';
 
 import { PlusIcon, useAppDispatch } from '@/shared';
-import { addTrackInPlayList, fetchPlaylists, PlayList } from '@/entities';
-import { useEffect } from 'react';
+import { addTrackInPlayList, PlayList } from '@/entities';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 interface AddInPlayList {
@@ -13,31 +12,23 @@ interface AddInPlayList {
 const AddInPlayList = ({ trackId, playlists }: AddInPlayList) => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPlaylists());
-  }, []);
-
   if (playlists?.length === 0) {
     return <div className={styles.popupBody}>Сначала создайте плейлист</div>;
   }
 
   return (
     <DropdownButton title={<PlusIcon />}>
-      {Array.isArray(playlists) ? (
-        playlists?.map((el) => (
-          <Dropdown.Item
-            onClick={() => {
-              dispatch(addTrackInPlayList({ trackId, playListId: el._id }));
-            }}
-            key={el._id}
-            eventKey={el._id}
-          >
-            {el.name}
-          </Dropdown.Item>
-        ))
-      ) : (
-        <></>
-      )}
+      {playlists?.map((el) => (
+        <Dropdown.Item
+          onClick={() => {
+            dispatch(addTrackInPlayList({ trackId, playListId: el._id }));
+          }}
+          key={el._id}
+          eventKey={el._id}
+        >
+          {el.name}
+        </Dropdown.Item>
+      ))}
     </DropdownButton>
   );
 };

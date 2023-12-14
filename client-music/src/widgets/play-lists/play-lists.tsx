@@ -19,11 +19,7 @@ const PlayLists = () => {
   return (
     <VStack gap={'16'} max align={'center'}>
       <CreatePlayList />
-      {Array.isArray(playlists) ? (
-        playlists?.map((el) => <PlayListItem key={el._id} playlist={el} />)
-      ) : (
-        <></>
-      )}
+      {playlists?.map((el) => <PlayListItem key={el._id} playlist={el} />)}
     </VStack>
   );
 };

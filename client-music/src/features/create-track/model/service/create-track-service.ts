@@ -5,7 +5,7 @@ import {
   getCreateTrackText,
 } from '../selectors/create-track-selectors';
 import { ThunkConfig } from '@/app/store/config/state-schema';
-import { Track } from '@/entities';
+import { fetchTracks, Track } from '@/entities';
 
 export const createTrack = createAsyncThunk<
   Track[],
@@ -15,7 +15,7 @@ export const createTrack = createAsyncThunk<
   },
   ThunkConfig<string>
 >('createTrack', async (props, thunkApi) => {
-  const { extra, rejectWithValue, getState } = thunkApi;
+  const { extra, rejectWithValue, getState, dispatch } = thunkApi;
   const name = getCreateTrackName(getState());
   const text = getCreateTrackText(getState());
   const artist = getCreateTrackArtist(getState());
@@ -33,7 +33,7 @@ export const createTrack = createAsyncThunk<
     if (!response.data) {
       throw new Error();
     }
-
+    dispatch(fetchTracks());
     return response.data;
   } catch (e) {
     return rejectWithValue('post track error');

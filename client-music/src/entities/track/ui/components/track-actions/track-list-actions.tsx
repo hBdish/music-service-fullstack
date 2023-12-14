@@ -1,13 +1,18 @@
 import {
   getRouteTrack,
+  HStack,
   InfoIcon,
-  PlusIcon,
   TrashIcon,
   useAppDispatch,
 } from '@/shared';
 import { useNavigate } from 'react-router-dom';
-import React, { useRef, useState } from 'react';
-import { AddInPlayList, deleteTrack, usePlaylists } from '@/entities';
+import React, { useEffect } from 'react';
+import {
+  AddInPlayList,
+  deleteTrack,
+  fetchPlaylists,
+  usePlaylists,
+} from '@/entities';
 import { Button } from 'react-bootstrap';
 
 interface TrackListActions {
@@ -19,9 +24,11 @@ const TrackListActions = (props: TrackListActions) => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const buttonRef = useRef(null);
-  const [open, setOpen] = useState(false);
   const playlists = usePlaylists();
+
+  useEffect(() => {
+    dispatch(fetchPlaylists());
+  }, []);
 
   const delTrack = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -29,18 +36,8 @@ const TrackListActions = (props: TrackListActions) => {
   };
 
   return (
-    <>
-      {open ? (
-        <Button
-          ref={buttonRef}
-          onClick={() => setOpen((prevOpen) => !prevOpen)}
-        >
-          <PlusIcon />
-        </Button>
-      ) : (
-        <AddInPlayList playlists={playlists} trackId={trackId} />
-      )}
-
+    <HStack max gap={'4'} justify={'end'} style={{ paddingRight: '8px' }}>
+      <AddInPlayList playlists={playlists} trackId={trackId} />
       <Button
         onClick={() => {
           navigate(getRouteTrack(trackId));
@@ -51,7 +48,7 @@ const TrackListActions = (props: TrackListActions) => {
       <Button onClick={delTrack}>
         <TrashIcon />
       </Button>
-    </>
+    </HStack>
   );
 };
 

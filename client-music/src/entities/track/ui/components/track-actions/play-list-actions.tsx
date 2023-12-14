@@ -1,6 +1,6 @@
 import { deleteTrackFromPlayList } from '@/entities';
 import React from 'react';
-import { TrashIcon, useAppDispatch } from '@/shared';
+import { HStack, TrashIcon, useAppDispatch } from '@/shared';
 import { Button } from 'react-bootstrap';
 
 interface PlayListActions {
@@ -26,9 +26,11 @@ const PlayListActions = (props: PlayListActions) => {
   };
 
   return (
-    <Button variant={'outline-danger'} onClick={delTrackFromPlayList}>
-      <TrashIcon />
-    </Button>
+    <HStack max justify={'end'} style={{ paddingRight: '8px' }}>
+      <Button variant={'outline-danger'} onClick={delTrackFromPlayList}>
+        <TrashIcon />
+      </Button>
+    </HStack>
   );
 };
 

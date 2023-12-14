@@ -17,7 +17,6 @@ export const fetchPlaylists = createAsyncThunk<
     if (!response.data) {
       throw new Error();
     }
-
     return response.data;
   } catch (e) {
     console.log(e);
@@ -34,7 +33,7 @@ export const fetchPlaylist = createAsyncThunk<
 
   try {
     const response = await extra.api.get<PlayList>(`/play-lists/${id}`);
-
+    console.log(response.data);
     if (!response.data) {
       throw new Error();
     }
@@ -101,7 +100,7 @@ export const addTrackInPlayList = createAsyncThunk<
     playListId: string;
   },
   ThunkConfig<string>
->('playlist/fetchAllPlaylists', async (props, thunkApi) => {
+>('playlist/addTrackInPlayList', async (props, thunkApi) => {
   const { extra, rejectWithValue } = thunkApi;
   const { trackId, playListId } = props;
 

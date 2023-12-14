@@ -50,7 +50,12 @@ const Track = (props: TrackProps) => {
         imgSrc={`http://localhost:100/${track.picture}`}
         style={{ marginLeft: '8px' }}
       />
-      <VStack max style={{ paddingLeft: '4px' }}>
+      <VStack
+        max
+        justify={'center'}
+        align={'start'}
+        style={{ paddingLeft: '4px', maxWidth: '100px', overflow: 'hidden' }}
+      >
         <span>{track.name}</span>
         <span>{track.artist}</span>
       </VStack>
