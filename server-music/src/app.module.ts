@@ -15,7 +15,9 @@ import * as process from 'process';
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
     }),
-    MongooseModule.forRoot(process.env.MONGO_URL || 'mongodb://127.0.0.1:101/db_music'),
+    MongooseModule.forRoot(
+      process.env.MONGO_URL || 'mongodb://127.0.0.1:101/db_music',
+    ),
   ],
 })
 export class AppModule {}

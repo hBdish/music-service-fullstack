@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchPlaylist, useSelectedPlaylist } from '@/entities';
 import { useAppDispatch } from '@/shared';
 
-const PlayListInfo = () => {
+const PlayListInfoPage = () => {
   const { id: playListId } = useParams<{ id: string }>();
   const selectedPlaylist = useSelectedPlaylist();
   const dispatch = useAppDispatch();
@@ -23,4 +23,4 @@ const PlayListInfo = () => {
   );
 };
 
-export { PlayListInfo };
+export { PlayListInfoPage };

@@ -1,1 +1,1 @@
-export * from './track-info';
+export * from './track-info-page';

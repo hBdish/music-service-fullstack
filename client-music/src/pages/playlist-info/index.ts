@@ -1,1 +1,1 @@
-export * from './play-list-info';
+export * from './play-list-info-page';

@@ -4,6 +4,8 @@ services:
     container_name: db_music
     image: mongo:7.0.3
     command: mongod --port 101
+    volumes:
+      - ./server-music/__volumes:/data/db
     ports:
       - '101:101'
     environment:
@@ -24,16 +26,15 @@ services:
     networks:
       - internal_net
 
-#  client-music:
-#    build:
-#      dockerfile: client-music2/Dockerfile
-#    container_name: client-music2
-#    ports:
-#      - "3000:3000"
-#    depends_on:
-#      - back_music
-#    networks:
-#      - internal_net
+  client-music:
+    build:
+      dockerfile: client-music/Dockerfile
+    container_name: client-music
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back_music
+
 
 networks:
   internal_net:

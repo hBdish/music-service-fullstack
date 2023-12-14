@@ -1,20 +1,17 @@
-FROM node:20 as build
+FROM node:20-alpine as build
 LABEL authors="maksim"
-
-# Create app directory
 WORKDIR /usr/src/app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY ../server-music/package*.json ./
-
-# Install app dependencies
-RUN npm install
-
-# Bundle app source
+RUN npm ci
 COPY ../server-music/ .
-
-# Creates a "dist" folder with the production build
 RUN npm run build
 
-# Start the server using the production build
+FROM node:20-alpine
+LABEL authors="maksim"
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app/dist ./dist
+COPY ../server-music/package*.json ./
+RUN npm ci --omit=dev
+
 CMD [ "node", "dist/main.js" ]

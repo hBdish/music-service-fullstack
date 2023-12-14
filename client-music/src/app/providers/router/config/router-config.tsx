@@ -12,8 +12,8 @@ import { TracksPage } from '@/pages/tracks';
 import { PlayListsPage } from '@/pages/play-lists';
 import { MainPage } from '@/pages/main-page';
 import { CreateTrackPage } from '@/pages/create-track-page/create-track-page';
-import { PlayListInfo } from '@/pages/playlist-info';
-import { TrackInfo } from '@/pages/track-info';
+import { PlayListInfoPage } from '@/pages/playlist-info';
+import { TrackInfoPage } from '@/pages/track-info';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -23,7 +23,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
 
   [AppRoutes.TRACK]: {
     path: getRouteTrack(':id'),
-    element: <TrackInfo />,
+    element: <TrackInfoPage />,
   },
   [AppRoutes.TRACKS]: {
     path: getRouteTracks(),
@@ -40,6 +40,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.PLAYLIST]: {
     path: getRoutePlaylistsItem(':id'),
-    element: <PlayListInfo />,
+    element: <PlayListInfoPage />,
   },
 };
